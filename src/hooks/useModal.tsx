@@ -8,6 +8,8 @@ import {
   SetStateAction,
 } from "react";
 
+// TODO: handle ts issues
+
 interface modalContent {
   setModal: Dispatch<SetStateAction<JSX.Element>> | undefined;
 }

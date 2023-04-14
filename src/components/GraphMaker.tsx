@@ -3,6 +3,8 @@ import { AlbumModal, RadarChart, RangeSlider } from "~/components";
 import { MusicIcon } from "~/components/SVGs";
 import { useMediaQuery, useModal } from "~/hooks";
 
+// TODO: handle ts issues
+
 interface props {
   chartData: chartData[];
   setChartData: React.Dispatch<React.SetStateAction<chartData[]>>;
@@ -34,11 +36,13 @@ const GraphMaker = ({ chartData, setChartData, selectedChart }: props) => {
 
   const needsLabels = !useMediaQuery("(min-width: 1024px)");
   const labels = needsLabels ? numerals : fullLabels;
+  // @ts-ignore
   const { overall, strum, depression, society, bleep, anxiety } =
     chartData[selectedChart];
 
   const updateName = (name: string) => {
     let clone = [...chartData];
+    //@ts-ignore
     clone[selectedChart].albumName = name;
     setChartData(clone);
   };
@@ -70,7 +74,10 @@ const GraphMaker = ({ chartData, setChartData, selectedChart }: props) => {
             className="btn items-center gap-3"
             onClick={useModal(<AlbumModal setAlbum={updateName} />)}
           >
-            {chartData[selectedChart].albumName || "Choose an album"}
+            {
+              // @ts-ignore
+              chartData[selectedChart].albumName || "Choose an album"
+            }
             <MusicIcon />
           </button>
         </div>
@@ -84,6 +91,7 @@ const GraphMaker = ({ chartData, setChartData, selectedChart }: props) => {
                 </div>
               }
               sliderVal={
+                //@ts-ignore
                 chartData[selectedChart][key as keyof chartData] as number
               }
               setOuter={(x) => {
