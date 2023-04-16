@@ -15,19 +15,19 @@ const CategoryInputField: FC<props> = ({ label }) => {
   };
   return (
     <>
-      <div className='flex flex-col gap-5'>
-        <div className='-mb-3'>{label}</div>
-        <div className='flex items-center gap-5'>
+      <div className="flex flex-col gap-5">
+        <div className="-mb-3">{label}</div>
+        <div className="flex items-center gap-5">
           <input
-            type='number'
-            pattern='[1-9]|10'
-            placeholder='Type here'
-            className='input input-bordered w-full max-w-xs'
+            type="number"
+            pattern="[1-9]|10"
+            placeholder="Type here"
+            className="input-bordered input w-full max-w-xs"
             defaultValue={userInput}
             onChange={(e) => setUserInput(e.target.value)}
             onKeyDown={(e) => handleKeyDown(e)}
           />
-          <div className='px-4 py-2 w-max text-secondary font-medium text-lg border-2 border-pink-600'>
+          <div className="w-max border-2 border-pink-600 px-4 py-2 text-lg font-medium text-amber-400">
             {"0" || updatedInput}
           </div>
         </div>

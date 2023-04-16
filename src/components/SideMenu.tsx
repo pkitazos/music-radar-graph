@@ -21,7 +21,7 @@ const SideMenu = ({
   };
   return (
     <div className="absolute top-0">
-      <ul className="menu bg-base-100 rounded-box w-max gap-1 p-2">
+      <ul className="menu rounded-box w-max gap-1 bg-neutral p-2">
         <li>
           <div>
             <HomeIcon />

@@ -55,7 +55,7 @@ const RangeSlider = ({ label, sliderVal, setOuter }: props) => {
         max={10}
         value={preProcess}
         onChange={handleInputChange}
-        className="text-secondary input input-ghost w-1/6 text-right text-xl sm:w-1/12 lg:mt-2.5 lg:w-1/6"
+        className="input-ghost input w-1/6 text-right text-xl text-orange-500 sm:w-1/12 lg:mt-2.5 lg:w-1/6"
       />
       <div className="w-10/12">
         <div className="m-2">{label}</div>

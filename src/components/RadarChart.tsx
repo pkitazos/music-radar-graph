@@ -24,8 +24,8 @@ const RadarChart = ({ labels, values }: props) => {
     datasets: [
       {
         data: [...values],
-        backgroundColor: "rgba(219, 39, 119, 0.2)",
-        borderColor: "rgb(219, 39, 119)",
+        backgroundColor: "hsla(19, 95%, 53%, 20%)",
+        borderColor: "hsl(19, 95%, 53%)",
         borderWidth: 2,
       },
     ],
