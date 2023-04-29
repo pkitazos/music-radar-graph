@@ -6,18 +6,70 @@ generator client {
 }
 
 datasource db {
-    provider = "sqlite"
-    // NOTE: When using postgresql, mysql or sqlserver, uncomment the @db.Text annotations in model Account below
-    // Further reading:
-    // https://next-auth.js.org/adapters/prisma#create-the-prisma-schema
-    // https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#string
-    url      = env("DATABASE_URL")
+    provider     = "mysql"
+    url          = env("DATABASE_URL")
+    relationMode = "prisma"
 }
 
-model Example {
-    id        String   @id @default(cuid())
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+// Content refers to either an Album or an individual Track
+model Media {
+    contentId     String          @id @default(cuid())
+    GraphTemplate GraphTemplate[]
+}
+
+enum Visibility {
+    PUBLIC
+    PRIVATE
+    UNLISTED
+}
+
+model TemplateField {
+    ID              String        @id @default(cuid())
+    name            String
+    for             GraphTemplate @relation(fields: [graphTemplateID], references: [ID])
+    graphTemplateID String
+    FieldValue      FieldValue[]
+
+    @@index([graphTemplateID])
+}
+
+model FieldValue {
+    ID              String        @id @default(cuid())
+    for             GraphInstance @relation(fields: [graphInstanceID], references: [ID])
+    graphInstanceID String
+    value           Float
+    field           TemplateField @relation(fields: [fieldID], references: [ID])
+    fieldID         String
+
+    @@index([graphInstanceID])
+    @@index([fieldID])
+}
+
+model GraphTemplate {
+    ID             String          @id @default(cuid())
+    media          Media           @relation(fields: [mediaID], references: [contentId])
+    mediaID        String
+    range          Int
+    visibility     Visibility
+    TemplateFields TemplateField[]
+    owner          User            @relation(fields: [ownerId], references: [id])
+    ownerId        String
+    GraphInstance  GraphInstance[]
+
+    @@index([ownerId])
+    @@index([mediaID])
+}
+
+model GraphInstance {
+    ID              String        @id @default(cuid())
+    for             GraphTemplate @relation(fields: [graphTemplateID], references: [ID])
+    graphTemplateID String
+    values          FieldValue[]
+    user            User          @relation(fields: [userID], references: [id])
+    userID          String
+
+    @@index([graphTemplateID])
+    @@index([userID])
 }
 
 // Necessary for Next auth
@@ -37,6 +89,7 @@ model Account {
     user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
     @@unique([provider, providerAccountId])
+    @@index([userId])
 }
 
 model Session {
@@ -45,16 +98,20 @@ model Session {
     userId       String
     expires      DateTime
     user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    @@index([userId])
 }
 
 model User {
-    id            String    @id @default(cuid())
+    id            String          @id @default(cuid())
     name          String?
-    email         String?   @unique
+    email         String?         @unique
     emailVerified DateTime?
     image         String?
     accounts      Account[]
     sessions      Session[]
+    GraphTemplate GraphTemplate[]
+    GraphInstance GraphInstance[]
 }
 
 model VerificationToken {
