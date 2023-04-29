@@ -9,7 +9,7 @@ interface props {
 const AlbumButton = ({ title }: props) => {
   return (
     <Link
-      href={slugify(title)}
+      href={`/graphs${slugify(title)}`}
       className="flex flex-col items-center transition-all duration-200 hover:scale-105 group-hover:opacity-40 group-hover:hover:opacity-100"
     >
       <Image
