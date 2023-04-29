@@ -1,9 +1,11 @@
+import Link from "next/link";
 import {
   GraphIcon,
   SaveIcon,
   HomeIcon,
   InfoIcon,
   PlusIcon,
+  RadarIcon,
 } from "~/components/SVGs";
 import { defaultChart } from "~/data";
 
@@ -26,21 +28,28 @@ const SideMenu = ({
     return "";
   };
   return (
-    <div className="absolute top-0">
+    <div className="left-0 top-0 h-screen">
       <ul className="menu rounded-box w-max gap-1 p-2">
+        <li className="tooltip tooltip-right" data-tip="Home Page">
+          <Link href="/" className="hover:bg-slate-800/50">
+            <HomeIcon />
+          </Link>
+        </li>
+        <li className="tooltip tooltip-right" data-tip="Graph Page">
+          <Link href="/global-graphs" className="hover:bg-slate-800/50">
+            <RadarIcon />
+          </Link>
+        </li>
+        <div className="divider" />
+
         <li>
           <div className="hover:bg-slate-800/50">
-            <HomeIcon />
+            <InfoIcon />
           </div>
         </li>
         <li>
           <div className="hover:bg-slate-800/50">
             <SaveIcon />
-          </div>
-        </li>
-        <li>
-          <div className="hover:bg-slate-800/50">
-            <InfoIcon />
           </div>
         </li>
         <li className="tooltip tooltip-right" data-tip="create new Graph">
