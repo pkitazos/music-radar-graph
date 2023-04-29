@@ -4,5 +4,6 @@ export { default as HomeIcon } from "./HomeIcon";
 export { default as InfoIcon } from "./InfoIcon";
 export { default as MusicIcon } from "./MusicIcon";
 export { default as PlusIcon } from "./PlusIcon";
+export { default as RadarIcon } from "./RadarIcon";
 export { default as SaveIcon } from "./SaveIcon";
 export { default as TickIcon } from "./TickIcon";
