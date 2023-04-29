@@ -1,4 +1,10 @@
-import { GraphIcon, HomeIcon, InfoIcon, PlusIcon } from "~/components/SVGs";
+import {
+  GraphIcon,
+  SaveIcon,
+  HomeIcon,
+  InfoIcon,
+  PlusIcon,
+} from "~/components/SVGs";
 import { defaultChart } from "~/data";
 
 interface props {
@@ -25,6 +31,11 @@ const SideMenu = ({
         <li>
           <div className="hover:bg-slate-800/50">
             <HomeIcon />
+          </div>
+        </li>
+        <li>
+          <div className="hover:bg-slate-800/50">
+            <SaveIcon />
           </div>
         </li>
         <li>
