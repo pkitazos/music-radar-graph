@@ -9,11 +9,18 @@ interface props {
   chartData: chartData[];
   setChartData: React.Dispatch<React.SetStateAction<chartData[]>>;
   selectedChart: number;
+  color?: { H: number; S: number; L: number };
+  textColor?: string;
 }
 
-const GraphMaker = ({ chartData, setChartData, selectedChart }: props) => {
+const GraphMaker = ({
+  chartData,
+  setChartData,
+  selectedChart,
+  color,
+  textColor,
+}: props) => {
   const modalButtonRef = useRef<HTMLButtonElement>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const numerals = ["I", "II", "III", "IV", "VI", "VI"];
   const keys = [
@@ -40,6 +47,9 @@ const GraphMaker = ({ chartData, setChartData, selectedChart }: props) => {
   const { overall, strum, depression, society, bleep, anxiety } =
     chartData[selectedChart];
 
+  const defaultColor = color ?? { H: 84, S: 81, L: 44 };
+  const defaultTextColor = textColor ?? "text-lime-500";
+
   const updateName = (name: string) => {
     let clone = [...chartData];
     //@ts-ignore
@@ -65,6 +75,7 @@ const GraphMaker = ({ chartData, setChartData, selectedChart }: props) => {
         <RadarChart
           labels={labels}
           values={[overall, strum, depression, society, bleep, anxiety]}
+          color={defaultColor}
         />
       </div>
       <div className="flex flex-col md:w-full md:flex-col md:place-items-center lg:w-1/3 lg:min-w-fit">
@@ -74,10 +85,7 @@ const GraphMaker = ({ chartData, setChartData, selectedChart }: props) => {
             className="btn items-center gap-3"
             onClick={useModal(<AlbumModal setAlbum={updateName} />)}
           >
-            {
-              // @ts-ignore
-              chartData[selectedChart].albumName || "Choose an album"
-            }
+            {chartData[selectedChart]!.albumName || "Choose an album"}
             <MusicIcon />
           </button>
         </div>
@@ -85,14 +93,14 @@ const GraphMaker = ({ chartData, setChartData, selectedChart }: props) => {
           {keys.map((key, i) => (
             <RangeSlider
               key={i}
+              textColor={defaultTextColor}
               label={
                 <div>
                   {needsLabels && numerals[i] + " - "} {fullLabels[i]}
                 </div>
               }
               sliderVal={
-                //@ts-ignore
-                chartData[selectedChart][key as keyof chartData] as number
+                chartData[selectedChart]![key as keyof chartData] as number
               }
               setOuter={(x) => {
                 let clone = [...chartData];

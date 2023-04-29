@@ -14,9 +14,10 @@ ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip);
 interface props {
   values: number[];
   labels: string[];
+  color: { H: number; S: number; L: number };
 }
 
-const RadarChart = ({ labels, values }: props) => {
+const RadarChart = ({ labels, values, color }: props) => {
   const isLarge = useMediaQuery("(min-width: 1024px)");
 
   const data = {
@@ -24,8 +25,8 @@ const RadarChart = ({ labels, values }: props) => {
     datasets: [
       {
         data: [...values],
-        backgroundColor: "hsla(84, 81%, 44%, 20%)",
-        borderColor: "hsl(84, 81%, 44%)",
+        backgroundColor: `hsla(${color.H}, ${color.S}%, ${color.L}%, 20%)`,
+        borderColor: `hsl(${color.H}, ${color.S}%, ${color.L}%)`,
         borderWidth: 2,
       },
     ],
