@@ -60,8 +60,8 @@ const GraphMaker = ({ chartData, setChartData, selectedChart }: props) => {
   }, []);
 
   return (
-    <div className="flex h-screen flex-col justify-center gap-3 px-8 py-10 sm:gap-1 md:items-center md:gap-3 lg:flex-row-reverse lg:gap-5 xl:gap-14 xl:py-16">
-      <div className="flex h-2/5 justify-center md:w-max md:pt-3 lg:h-max lg:w-1/2 lg:pt-0">
+    <div className="flex h-screen w-full flex-col justify-center gap-3 px-8 py-10 sm:gap-1 md:items-center md:gap-3 lg:flex-row-reverse lg:gap-5 xl:gap-14 xl:py-16">
+      <div className="flex h-3/4 justify-center md:w-max md:pt-3 lg:h-max lg:w-1/2 lg:pt-0">
         <RadarChart
           labels={labels}
           values={[overall, strum, depression, society, bleep, anxiety]}
