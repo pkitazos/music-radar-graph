@@ -20,12 +20,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.svg" />
       </Head>
       <main className="flex bg-dark-base">
-        <SideMenu
-          selected={selected}
-          savedCharts={chartData}
-          setSavedCharts={setChartData}
-          setSelectedChart={setSelected}
-        />
+        <SideMenu />
         <div className="grid w-full place-content-center">
           <div className="group grid grid-cols-3 items-center justify-center gap-10 py-10">
             <AlbumButton title="Pablo Honey" />
