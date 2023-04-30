@@ -3,12 +3,12 @@ import Head from "next/head";
 import { useState } from "react";
 import Image from "next/image";
 
-import { RadarChart, SideMenu } from "~/components";
+import { RadarChart, RangeSlider, SideMenu } from "~/components";
 import { InfoIcon, MusicIcon, SaveIcon } from "~/SVGs";
 import { defaultChart } from "~/data";
 import { ModalProvider } from "~/hooks/useModal";
 import { slugify } from "~/utils";
-import Link from "next/link";
+import { useMediaQuery } from "~/hooks";
 
 const Home: NextPage = () => {
   let pageTitle = "A Moon Shaped Pool";
@@ -22,13 +22,35 @@ const Home: NextPage = () => {
   const { overall, strum, depression, society, bleep, anxiety } =
     chartData[selected]!;
 
+  const keys = [
+    "overall",
+    "strum",
+    "depression",
+    "society",
+    "bleep",
+    "anxiety",
+  ];
+
+  const isLarge = useMediaQuery("(min-width: 1024px)");
+
+  const numerals = ["I", "II", "III", "IV", "VI", "VI"];
+  const fullLabels = [
+    "Overall",
+    "Strum Strum",
+    "Depression",
+    "We Live in a Society",
+    "Bleep Bloop",
+    "Anxiety",
+  ];
+  const labels = !isLarge ? numerals : fullLabels;
+
   return (
     <>
       <Head>
         <title>{pageTitle}</title>
         <link rel="icon" href="/favicon.svg" />
       </Head>
-      <main className="flex bg-dark-base">
+      <main className="flex flex-row bg-dark-base">
         <ModalProvider>
           <SideMenu>
             <li>
@@ -49,23 +71,33 @@ const Home: NextPage = () => {
                 color={{ H: 0, S: 0, L: 100 }}
               />
             </div>
-            <div className="flex flex-col gap-10 md:w-full md:flex-col md:place-items-center lg:w-1/3 lg:min-w-fit">
-              <Image
-                width={260}
-                height={260}
-                src={`/assets${slugify(pageTitle)}.png`}
-                alt={`${pageTitle} album cover`}
-              />
-              <div className="btn items-center gap-3">
+            <div className="flex flex-col items-center">
+              <div className="btn w-max items-center gap-3">
                 {pageTitle}
                 <MusicIcon />
               </div>
-              <Link
-                href={`/graphs${slugify(pageTitle)}/my-rating`}
-                className="btn-primary btn"
-              >
-                rate it
-              </Link>
+              <div className="w-max">
+                {keys.map((key, i) => (
+                  <RangeSlider
+                    key={i}
+                    textColor="text-white"
+                    label={
+                      <div>
+                        {isLarge && numerals[i] + " - "} {fullLabels[i]}
+                      </div>
+                    }
+                    sliderVal={
+                      chartData[selected]![key as keyof chartData] as number
+                    }
+                    setOuter={(x) => {
+                      let clone = [...chartData];
+                      //@ts-ignore
+                      clone[selected][key as keyof chartData] = x;
+                      setChartData(clone);
+                    }}
+                  />
+                ))}
+              </div>
             </div>
           </div>
         </ModalProvider>

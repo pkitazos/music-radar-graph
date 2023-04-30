@@ -21,12 +21,7 @@ const Home: NextPage = () => {
       </Head>
       <main className="flex bg-dark-base">
         <ModalProvider>
-          <SideMenu
-            selected={selected}
-            savedCharts={chartData}
-            setSavedCharts={setChartData}
-            setSelectedChart={setSelected}
-          />
+          <SideMenu />
           <GraphMaker
             chartData={chartData}
             setChartData={setChartData}

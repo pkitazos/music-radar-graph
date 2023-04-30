@@ -13,12 +13,22 @@ ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip);
 
 interface props {
   values: number[];
-  labels: string[];
   color: { H: number; S: number; L: number };
 }
 
-const RadarChart = ({ labels, values, color }: props) => {
+const RadarChart = ({ values, color }: props) => {
   const isLarge = useMediaQuery("(min-width: 1024px)");
+
+  const numerals = ["I", "II", "III", "IV", "VI", "VI"];
+  const fullLabels = [
+    "Overall",
+    "Strum Strum",
+    "Depression",
+    "We Live in a Society",
+    "Bleep Bloop",
+    "Anxiety",
+  ];
+  const labels = !isLarge ? numerals : fullLabels;
 
   const data = {
     labels: [...labels],
