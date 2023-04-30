@@ -16,7 +16,7 @@ const Home: NextPage = () => {
   return (
     <>
       <Head>
-        <title>The Bends</title>
+        <title>In Rainbows</title>
         <link rel="icon" href="/favicon.svg" />
       </Head>
       <main className="flex bg-dark-base">
