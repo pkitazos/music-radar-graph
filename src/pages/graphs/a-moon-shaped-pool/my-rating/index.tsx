@@ -58,8 +58,11 @@ const Home: NextPage = () => {
                 <InfoIcon />
               </div>
             </li>
-            <li>
-              <div className="hover:bg-slate-800/50">
+            <li
+              className="tooltip tooltip-right"
+              data-tip="Save when you're done"
+            >
+              <div className="text-secondary hover:bg-slate-800/50">
                 <SaveIcon />
               </div>
             </li>
