@@ -3,6 +3,7 @@ import Head from "next/head";
 import { useState } from "react";
 
 import { GraphMaker, SideMenu } from "~/components";
+import { InfoIcon, SaveIcon } from "~/SVGs";
 import { defaultChart } from "~/data";
 import { ModalProvider } from "~/hooks/useModal";
 
@@ -21,12 +22,19 @@ const Home: NextPage = () => {
       </Head>
       <main className="flex bg-dark-base">
         <ModalProvider>
-          <SideMenu
-            selected={selected}
-            savedCharts={chartData}
-            setSavedCharts={setChartData}
-            setSelectedChart={setSelected}
-          />
+          <SideMenu>
+            <li>
+              <div className="hover:bg-slate-800/50">
+                <InfoIcon />
+              </div>
+            </li>
+            <li>
+              <div className="hover:bg-slate-800/50">
+                <SaveIcon />
+              </div>
+            </li>
+          </SideMenu>
+
           <GraphMaker
             chartData={chartData}
             setChartData={setChartData}
