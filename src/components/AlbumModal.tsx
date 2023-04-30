@@ -1,5 +1,5 @@
 import { FC, KeyboardEventHandler, useEffect, useRef, useState } from "react";
-import { CloseIcon, TickIcon } from "~/components/SVGs";
+import { CloseIcon, TickIcon } from "~/SVGs";
 import { useModal } from "~/hooks";
 
 interface props {
@@ -36,16 +36,16 @@ const AlbumModal: FC<props> = ({ setAlbum }) => {
           value={val}
           onChange={(e) => setVal(e.target.value)}
           onKeyDown={handleKeyDown}
-          className="input input-bordered w-full max-w-xs"
+          className="input-bordered input w-full max-w-xs"
         />
         <div className="flex gap-5">
-          <button className="btn btn-circle" onClick={close}>
+          <button className="btn-circle btn" onClick={close}>
             <CloseIcon />
           </button>
           <button
             ref={enterRef}
             disabled={!val}
-            className={`btn btn-primary btn-circle ${!val && "btn-disabled"}`}
+            className={`btn-primary btn-circle btn ${!val && "btn-disabled"}`}
             onClick={() => {
               setAlbum(val);
               close();
