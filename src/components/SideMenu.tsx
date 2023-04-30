@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { ReactNode } from "react";
-import { HomeIcon, InfoIcon } from "~/SVGs";
-import PieChartIcon from "~/SVGs/PieChartIcon";
+import { DiscIcon, InfoIcon, MapIcon } from "~/SVGs";
 
 interface props {
   children?: ReactNode[];
@@ -23,16 +22,16 @@ const SideMenu = ({ children }: props) => {
         </li>
         <li className="tooltip tooltip-right" data-tip="Home Page">
           <Link href="/" className="hover:bg-slate-800/50">
-            <HomeIcon />
+            <MapIcon />
           </Link>
         </li>
 
         <li className="tooltip tooltip-right" data-tip="Graph Page">
           <Link href="/graphs" className="hover:bg-slate-800/50">
-            <PieChartIcon />
+            <DiscIcon />
           </Link>
         </li>
-        <div className="divider -my-0.5" />
+        <div className="divider" />
 
         {/* //* adds new chart -> move to graph creation part of app */}
         {/*
@@ -66,7 +65,7 @@ const SideMenu = ({ children }: props) => {
         {children?.length && (
           <>
             {children}
-            <div className="divider -my-0.5" />
+            <div className="divider" />
           </>
         )}
       </ul>
