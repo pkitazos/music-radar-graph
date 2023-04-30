@@ -20,7 +20,7 @@ const SideMenu = ({ children }: props) => {
             <InfoIcon />
           </div>
         </li>
-        <li className="tooltip tooltip-right" data-tip="Home Page">
+        <li className="tooltip tooltip-right" data-tip="Where am I going?">
           <Link href="/" className="hover:bg-slate-800/50">
             <MapIcon />
           </Link>
