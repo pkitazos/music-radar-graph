@@ -32,7 +32,7 @@ const SideMenu = ({ children }: props) => {
             <PieChartIcon />
           </Link>
         </li>
-        <div className="divider" />
+        <div className="divider -my-0.5" />
 
         {/* //* adds new chart -> move to graph creation part of app */}
         {/*
@@ -66,7 +66,7 @@ const SideMenu = ({ children }: props) => {
         {children?.length && (
           <>
             {children}
-            <div className="divider" />
+            <div className="divider -my-0.5" />
           </>
         )}
       </ul>
