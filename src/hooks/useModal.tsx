@@ -21,7 +21,7 @@ let modalContext = createContext<modalContent>({
 interface props {
   children: ReactNode | ReactNode[];
 }
-export let ModalProvider: FC<props> = ({ children }) => {
+export const ModalProvider: FC<props> = ({ children }) => {
   let [modal, setModal] = useState(<div />);
 
   return (
