@@ -1,19 +1,22 @@
 import Link from "next/link";
+import { ReactNode } from "react";
 
 interface props {
   title: string;
-  description: string;
+  children?: ReactNode;
   href: string;
 }
 
-const PageButton = ({ title, description, href }: props) => {
+const PageButton = ({ title, children: description, href }: props) => {
   return (
     <Link
       href={href}
-      className="h-60 w-60 rounded-lg bg-gray-900/50 p-6 transition-all duration-200 hover:scale-105 hover:bg-gray-900/80 group-hover:opacity-40 group-hover:hover:opacity-100"
+      className=" mono flex h-64 w-64 flex-col justify-center rounded-lg bg-gray-900/50 p-6 transition-all duration-200 odd:rounded-tl-[10rem] odd:text-right even:rounded-br-[10rem] even:text-left hover:scale-105 hover:bg-gray-900/80 group-hover:opacity-40 group-hover:hover:opacity-100"
     >
-      <h2 className="text-2xl text-lime-400">{title}</h2>
-      <p className="mt-4">{description}</p>
+      <h2 className="text-2xl text-white">{title}</h2>
+      {description && (
+        <p className="mt-4 text-lg tracking-wider">{description}</p>
+      )}
     </Link>
   );
 };
