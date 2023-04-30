@@ -13,8 +13,9 @@ datasource db {
 
 // Content refers to either an Album or an individual Track
 model Media {
-    contentId     String          @id @default(cuid())
+    mediaID       String          @id @default(cuid()) @map("contentId")
     GraphTemplate GraphTemplate[]
+    GraphInstance GraphInstance[]
 }
 
 enum Visibility {
@@ -23,53 +24,59 @@ enum Visibility {
     UNLISTED
 }
 
-model TemplateField {
-    ID              String        @id @default(cuid())
+// information about a particular field
+model FieldTemplate {
+    ID              String          @id @default(cuid())
     name            String
-    for             GraphTemplate @relation(fields: [graphTemplateID], references: [ID])
+    for             GraphTemplate   @relation(fields: [graphTemplateID], references: [ID])
     graphTemplateID String
-    FieldValue      FieldValue[]
+    field           FieldInstance[]
 
     @@index([graphTemplateID])
+    @@map("TemplateField")
 }
 
-model FieldValue {
+model FieldInstance {
     ID              String        @id @default(cuid())
     for             GraphInstance @relation(fields: [graphInstanceID], references: [ID])
     graphInstanceID String
     value           Float
-    field           TemplateField @relation(fields: [fieldID], references: [ID])
+    field           FieldTemplate @relation(fields: [fieldID], references: [ID])
     fieldID         String
 
     @@index([graphInstanceID])
     @@index([fieldID])
+    @@map("FieldValue")
 }
 
 model GraphTemplate {
     ID             String          @id @default(cuid())
-    media          Media           @relation(fields: [mediaID], references: [contentId])
+    media          Media           @relation(fields: [mediaID], references: [mediaID])
     mediaID        String
-    range          Int
+    maxValue       Int
     visibility     Visibility
-    TemplateFields TemplateField[]
-    owner          User            @relation(fields: [ownerId], references: [id])
-    ownerId        String
+    templateFields FieldTemplate[]
+    owner          User            @relation(fields: [ownerID], references: [id])
+    ownerID        String
     GraphInstance  GraphInstance[]
 
-    @@index([ownerId])
+    @@index([ownerID])
     @@index([mediaID])
 }
 
 model GraphInstance {
-    ID              String        @id @default(cuid())
-    for             GraphTemplate @relation(fields: [graphTemplateID], references: [ID])
+    ID              String          @id @default(cuid())
+    media           Media           @relation(fields: [mediaID], references: [mediaID])
+    mediaID         String
+    for             GraphTemplate   @relation(fields: [graphTemplateID], references: [ID])
     graphTemplateID String
-    values          FieldValue[]
-    user            User          @relation(fields: [userID], references: [id])
+    values          FieldInstance[]
+    user            User            @relation(fields: [userID], references: [id])
     userID          String
 
     @@index([graphTemplateID])
     @@index([userID])
+    @@index([mediaID])
 }
 
 // Necessary for Next auth
