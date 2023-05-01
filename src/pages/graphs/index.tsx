@@ -6,7 +6,7 @@ import { useState } from "react";
 import { AlbumButton, SideMenu } from "~/components";
 import { defaultChart } from "~/data";
 
-const Home: NextPage = () => {
+const AlbumSelection: NextPage = () => {
   const [selected, setSelected] = useState(0);
 
   const [chartData, setChartData] = useState<chartData[]>([
@@ -39,4 +39,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default AlbumSelection;
