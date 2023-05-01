@@ -1,18 +1,20 @@
-import { type NextPage } from "next";
+import { GetStaticPaths, GetStaticProps, type NextPage } from "next";
 import Head from "next/head";
 import { useState } from "react";
-import Image from "next/image";
 
-import { RadarChart, RangeSlider, SideMenu } from "~/components";
 import { InfoIcon, MusicIcon, SaveIcon } from "~/SVGs";
+import { RadarChart, RangeSlider, SideMenu } from "~/components";
 import { defaultChart } from "~/data";
-import { ModalProvider } from "~/hooks/useModal";
-import { slugify } from "~/utils";
-import { useMediaQuery } from "~/hooks";
+import { ModalProvider, useMediaQuery } from "~/hooks";
+import { pageInfo } from "~/pages/data";
 
-const Home: NextPage = () => {
-  let pageTitle = "A Moon Shaped Pool";
+interface props {
+  title: string;
+  color: { H: number; S: number; L: number };
+  templateID: string;
+}
 
+const AlbumRatingPage: NextPage<props> = ({ title, color, templateID }) => {
   const [selected, setSelected] = useState(0);
 
   const [chartData, setChartData] = useState<chartData[]>([
@@ -47,7 +49,7 @@ const Home: NextPage = () => {
   return (
     <>
       <Head>
-        <title>{pageTitle}</title>
+        <title>{title}</title>
         <link rel="icon" href="/favicon.svg" />
       </Head>
       <main className="flex flex-row bg-dark-base">
@@ -71,12 +73,12 @@ const Home: NextPage = () => {
             <div className="flex h-3/4 justify-center md:w-max md:pt-3 lg:h-max lg:w-1/2 lg:pt-0">
               <RadarChart
                 values={[overall, strum, depression, society, bleep, anxiety]}
-                color={{ H: 0, S: 0, L: 100 }}
+                color={color}
               />
             </div>
             <div className="flex flex-col items-center">
               <div className="btn w-max items-center gap-3">
-                {pageTitle}
+                {title}
                 <MusicIcon />
               </div>
               <div className="w-max">
@@ -109,4 +111,19 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default AlbumRatingPage;
+
+export const getStaticPaths: GetStaticPaths = () => {
+  return {
+    paths: Object.keys(pageInfo).map((e) => {
+      return { params: { album: e } };
+    }),
+    fallback: "blocking",
+  };
+};
+
+export const getStaticProps: GetStaticProps = (ctx) => {
+  let album = ctx.params!["album"] as keyof typeof pageInfo;
+  let a = { props: pageInfo[album] };
+  return a;
+};
