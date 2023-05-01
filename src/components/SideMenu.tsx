@@ -1,17 +1,13 @@
 import Link from "next/link";
 import { ReactNode } from "react";
 import { DiscIcon, InfoIcon, MapIcon } from "~/SVGs";
+import UserIcon from "~/SVGs/UserIcon";
 
 interface props {
   children?: ReactNode[];
 }
 
 const SideMenu = ({ children }: props) => {
-  // const colorFill = (i: number) => {
-  //   if (!savedCharts[i]?.albumName) return "text-warning";
-  //   if (selected === i) return "text-lime-500";
-  //   return "";
-  // };
   return (
     <div className="left-0 top-0 h-screen">
       <ul className="menu rounded-box w-max gap-1 p-2">
@@ -20,13 +16,17 @@ const SideMenu = ({ children }: props) => {
             <InfoIcon />
           </div>
         </li>
+        <li className="tooltip tooltip-right" data-tip="Sign In">
+          <Link href="/sign-in" className="hover:bg-slate-800/50">
+            <UserIcon />
+          </Link>
+        </li>
         <li className="tooltip tooltip-right" data-tip="Where am I going?">
           <Link href="/" className="hover:bg-slate-800/50">
             <MapIcon />
           </Link>
         </li>
-
-        <li className="tooltip tooltip-right" data-tip="Graph Page">
+        <li className="tooltip tooltip-right" data-tip="Album selection">
           <Link href="/graphs" className="hover:bg-slate-800/50">
             <DiscIcon />
           </Link>
