@@ -6,7 +6,7 @@ export const templateRouter = createTRPCRouter({
   getTemplateAverage: publicProcedure
     .input(z.string())
     .query(async ({ ctx, input: templateID }) => {
-      let fields = await ctx.prisma.templateField.findMany({
+      let fields = await ctx.prisma.fieldTemplate.findMany({
         where: {
           graphTemplateID: templateID,
         },
@@ -17,7 +17,7 @@ export const templateRouter = createTRPCRouter({
           ...acc,
           [val.name]:
             (
-              await ctx.prisma.fieldValue.aggregate({
+              await ctx.prisma.fieldInstance.aggregate({
                 _avg: {
                   value: true,
                 },
