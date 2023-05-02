@@ -3,7 +3,6 @@ import Link from "next/link";
 import { ReactNode } from "react";
 import { DiscIcon, InfoIcon, MapIcon } from "~/SVGs";
 import UserIcon from "~/SVGs/UserIcon";
-import { api } from "~/utils/api";
 
 interface props {
   children?: ReactNode[];

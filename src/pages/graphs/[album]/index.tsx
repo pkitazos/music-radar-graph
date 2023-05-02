@@ -8,8 +8,8 @@ import { InfoIcon, MusicIcon, SaveIcon } from "~/SVGs";
 import { RadarChart, SideMenu } from "~/components";
 import { defaultChart } from "~/data";
 import { ModalProvider } from "~/hooks";
-import { slugify } from "~/utils";
 import { pageInfo } from "~/pages/data";
+import { slugify } from "~/utils";
 import { api } from "~/utils/api";
 
 interface props {
