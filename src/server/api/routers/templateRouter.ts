@@ -3,6 +3,17 @@ import { z } from "zod";
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 
 export const templateRouter = createTRPCRouter({
+  getTemplateFieldNames: publicProcedure
+    .input(z.string())
+    .query(async ({ ctx, input: templateID }) => {
+      let fields = await ctx.prisma.fieldTemplate.findMany({
+        where: {
+          graphTemplateID: templateID,
+        },
+      });
+      return fields.map((field) => field.name);
+    }),
+
   getTemplateAverage: publicProcedure
     .input(z.string())
     .query(async ({ ctx, input: templateID }) => {
