@@ -11,6 +11,21 @@ export default {
   },
   plugins: [require("daisyui")],
   daisyui: {
-    themes: ["dark"],
+    themes: [
+      "dark",
+      {
+        "neon-ish": {
+          primary: "#d946ef",
+          secondary: "#111827",
+          accent: "#84cc16",
+          neutral: "#191D24",
+          "base-100": "#06070E",
+          info: "#9ca3af",
+          success: "#22c55e",
+          warning: "#fbbf24",
+          error: "#b91c1c",
+        },
+      },
+    ],
   },
 } satisfies Config;

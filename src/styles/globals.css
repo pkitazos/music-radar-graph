@@ -11,6 +11,26 @@
   outline-color: hsl(14, 80%, 50%);
 }
 
+.--orange {
+  outline: 2px solid;
+  outline-color: hsl(14, 80%, 50%);
+}
+
+.--lime {
+  outline: 2px solid;
+  outline-color: hsl(84, 81%, 44%);
+}
+
+.--sky {
+  outline: 2px solid;
+  outline-color: hsl(199, 89%, 48%);
+}
+
+.--purple {
+  outline: 2px solid;
+  outline-color: hsl(271, 91%, 65%);
+}
+
 .backdrop-glass {
   backdrop-filter: blur(3px) saturate(120%);
   -webkit-backdrop-filter: blur(3px) saturate(120%);

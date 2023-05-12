@@ -25,15 +25,12 @@ const Profile: NextPage = () => {
           </h1>
 
           {user ? (
-            <button
-              className="btn-secondary btn mt-6"
-              onClick={() => signOut()}
-            >
+            <button className="btn-primary btn mt-6" onClick={() => signOut()}>
               sign out
             </button>
           ) : (
             <button
-              className="btn-secondary btn mt-6"
+              className="btn-primary btn mt-6"
               onClick={() => signIn("spotify")}
             >
               sign in
