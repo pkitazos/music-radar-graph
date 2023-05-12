@@ -66,36 +66,6 @@ const SideMenu = ({ children }: props) => {
           </Link>
         </li>
         <div className="divider" />
-
-        {/* //* adds new chart -> move to graph creation part of app */}
-        {/*
-        <li className="tooltip tooltip-right" data-tip="create new Graph">
-          <div
-            className="hover:bg-slate-800/50"
-            onClick={() => {
-              setSavedCharts((e) => [...e, { ...defaultChart }]);
-              setSelectedChart(savedCharts.length);
-            }}
-          >
-            <PlusIcon />
-          </div>
-        </li> */}
-        {/* //* Something about saved charts (will load using custom hook) */}
-        {/* {savedCharts &&
-          savedCharts.map((_, i) => (
-            <li
-              key={i}
-              className="tooltip tooltip-right"
-              data-tip={savedCharts[i]?.albumName || "new album"}
-            >
-              <button
-                onClick={() => setSelectedChart(i)}
-                className={`hover:bg-slate-800/50 ${colorFill(i)}`}
-              >
-                <GraphIcon />
-              </button>
-            </li>
-          ))} */}
         {children?.length && (
           <>
             {children}

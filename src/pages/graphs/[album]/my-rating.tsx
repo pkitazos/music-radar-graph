@@ -5,7 +5,7 @@ import { useState } from "react";
 import { InfoIcon, SaveIcon } from "~/SVGs";
 import { RadarGraph, RangeSlider, SideMenu } from "~/components";
 import { ModalProvider, useMediaQuery } from "~/hooks";
-import { pageInfo } from "~/pages/data";
+import { pageInfo } from "~/data";
 import { generateNumerals, getFieldNames, getFieldValues } from "~/utils";
 
 interface props {

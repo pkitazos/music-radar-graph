@@ -6,7 +6,7 @@ import Link from "next/link";
 import { InfoIcon, SaveIcon } from "~/SVGs";
 import { RadarGraph, SideMenu } from "~/components";
 import { ModalProvider, useMediaQuery } from "~/hooks";
-import { pageInfo } from "~/pages/data";
+import { pageInfo } from "~/data";
 import {
   generateNumerals,
   getFieldNames,

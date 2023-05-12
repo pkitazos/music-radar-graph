@@ -1,17 +1,9 @@
 import { type NextPage } from "next";
 import Head from "next/head";
-import { useState } from "react";
 
 import { AlbumButton, SideMenu } from "~/components";
-import { defaultChart } from "~/data";
 
 const AlbumSelection: NextPage = () => {
-  const [selected, setSelected] = useState(0);
-
-  const [chartData, setChartData] = useState<chartData[]>([
-    { ...defaultChart },
-  ]);
-
   return (
     <>
       <Head>

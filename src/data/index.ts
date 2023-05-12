@@ -1,1 +1,1 @@
-export { default as defaultChart } from "./defaultChart";
+export { default as pageInfo } from "./pageInfo";
