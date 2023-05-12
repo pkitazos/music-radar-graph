@@ -15,7 +15,7 @@ export default {
       "dark",
       {
         "neon-ish": {
-          primary: "#d946ef",
+          primary: "#f41f6d",
           secondary: "#111827",
           accent: "#84cc16",
           neutral: "#191D24",
