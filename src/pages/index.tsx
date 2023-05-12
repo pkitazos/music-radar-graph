@@ -13,7 +13,7 @@ const Home: NextPage = () => {
     { ...defaultChart },
   ]);
   let { data, status, error, isSuccess } =
-    api.accountRouter.getSpotifyAccount.useQuery();
+    api.accountRouter.getSpotifyProfile.useQuery();
 
   return (
     <>

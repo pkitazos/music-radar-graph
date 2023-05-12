@@ -1,6 +1,7 @@
 export { default as slugify } from "./slugify";
 export { default as getAccessToken } from "./getAccessToken";
-export { HEXtoRGB as HEXtoRGB } from "./colorHelpers";
-export { RGBtoHEX as RGBtoHEX } from "./colorHelpers";
-export { RGBtoHSL as RGBtoHSL } from "./colorHelpers";
-export { HSLtoRGB as HSLtoRGB } from "./colorHelpers";
+export { default as fetchProfile } from "./fetchProfile";
+export { HEXtoRGB as HEXtoRGB } from "./colorConverters";
+export { RGBtoHEX as RGBtoHEX } from "./colorConverters";
+export { RGBtoHSL as RGBtoHSL } from "./colorConverters";
+export { HSLtoRGB as HSLtoRGB } from "./colorConverters";

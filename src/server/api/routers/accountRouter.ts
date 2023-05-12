@@ -1,6 +1,5 @@
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
-import fetchProfile from "~/utils/fetchProfile";
-import getAccessToken from "~/utils/getAccessToken";
+import { getAccessToken, fetchProfile } from "~/utils";
 
 export const accountRouter = createTRPCRouter({
   getAccessToken: publicProcedure.query(async ({ ctx }) => {
@@ -9,7 +8,7 @@ export const accountRouter = createTRPCRouter({
     return await getAccessToken({ ctx });
   }),
 
-  getSpotifyAccount: publicProcedure.query(async ({ ctx }) => {
+  getSpotifyProfile: publicProcedure.query(async ({ ctx }) => {
     if (!ctx.session) throw new Error("User not signed in.");
 
     let userAccount = await ctx.prisma.account.findFirstOrThrow({
