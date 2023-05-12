@@ -5,17 +5,17 @@ import Link from "next/link";
 import { useState } from "react";
 
 import { InfoIcon, MusicIcon, SaveIcon } from "~/SVGs";
-import { RadarChart, SideMenu } from "~/components";
+import { SideMenu } from "~/components";
 import RadarGraph from "~/components/RadarGraph";
 import { defaultChart } from "~/data";
 import { ModalProvider } from "~/hooks";
 import { pageInfo } from "~/pages/data";
-import { slugify } from "~/utils";
+import { HSLtoRGB, RGBtoHEX, slugify } from "~/utils";
 import { api } from "~/utils/api";
 
 interface props {
   title: string;
-  color: { H: number; S: number; L: number };
+  color: colorHSL;
   templateID: string;
 }
 
@@ -34,6 +34,9 @@ const AlbumPage: NextPage<props> = ({ title, color, templateID }) => {
 
   const { overall, strum, depression, society, bleep, anxiety } =
     chartData[selected]!;
+
+  let RGBColor = HSLtoRGB(color);
+  let HEXColor = RGBtoHEX(RGBColor);
 
   return (
     <>
@@ -68,62 +71,27 @@ const AlbumPage: NextPage<props> = ({ title, color, templateID }) => {
                   "Anxiety",
                 ]}
                 maxRating={10}
+                HEXcolor={"#1fdf64"}
               />
             </div>
             <div className="grid place-items-center md:w-full lg:w-1/3 lg:min-w-fit">
-              <div className="grid h-max w-96 grid-rows-[11] gap-y-10 text-center">
-                <div className="row-span-1 grid grid-cols-7 gap-x-10">
-                  <div className="col-span-5 ">
-                    <h1 className="flex items-center gap-3 font-mono text-4xl font-semibold">
-                      {title}
-                      <MusicIcon className="w-5" />
-                    </h1>
-                  </div>
-                </div>
-                <div className="row-span-2 row-start-2 grid grid-cols-7 gap-x-10">
-                  <div className="col-span-5">
-                    <div className="h-32 w-32 rounded-lg rounded-br-[10rem] bg-zinc-900">
-                      &nbsp;
-                    </div>
-                  </div>
-                </div>
-                <div className="row-span-5 row-start-4 grid h-max grid-cols-7 gap-x-10">
-                  <Image
-                    className="col-span-5 row-span-5 h-max w-full"
-                    width={300}
-                    height={300}
-                    src={`/assets${slugify(title)}.png`}
-                    alt={`${title} album cover`}
-                  />
-
-                  <div className="col-span-2 col-start-6 row-span-5 w-full">
-                    <div className="h-32 w-32 rounded-lg rounded-bl-[10rem] bg-zinc-900">
-                      &nbsp;
-                    </div>
-                  </div>
-                </div>
-                <div className="row-span-2 row-start-[9] grid grid-cols-7 gap-x-10">
-                  <div className="col-span-5 flex justify-end ">
-                    <div className="h-32 w-32 rounded-lg rounded-tl-[10rem] bg-zinc-900">
-                      &nbsp;
-                    </div>
-                  </div>
-                  <div className="col-span-2 col-start-6 flex items-end">
-                    <div className="btn-disabled btn w-32 bg-zinc-900">
-                      &nbsp;
-                    </div>
-                  </div>
-                </div>
-                <div className="row-span-1 row-start-[11] grid grid-cols-7 gap-x-10 ">
-                  <div className="col-span-5 flex justify-end">
-                    <Link
-                      href={`/graphs${slugify(title)}/my-rating`}
-                      className="btn-accent btn w-32"
-                    >
-                      rate it
-                    </Link>
-                  </div>
-                </div>
+              <div className="flex flex-col gap-10">
+                <h1 className="flex items-center gap-3 font-mono text-4xl font-semibold">
+                  {title}
+                  <MusicIcon className="w-5" />
+                </h1>
+                <Image
+                  width={300}
+                  height={300}
+                  src={`/assets${slugify(title)}.png`}
+                  alt={`${title} album cover`}
+                />
+                <Link
+                  href={`/graphs${slugify(title)}/my-rating`}
+                  className="btn w-32 bg-[#1fdf64] font-mono text-xl font-semibold text-black hover:bg-[#1fdf64]/50"
+                >
+                  rate it
+                </Link>
               </div>
             </div>
           </div>

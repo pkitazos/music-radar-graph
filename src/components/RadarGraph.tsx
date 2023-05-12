@@ -6,24 +6,34 @@ interface props {
   labels: string[];
   prevData?: number[];
   maxRating: number;
+  HEXcolor: string;
 }
 
-const RadarGraph: FC<props> = ({ data, labels, prevData, maxRating }) => {
+const RadarGraph: FC<props> = ({
+  data,
+  labels,
+  prevData,
+  maxRating,
+  HEXcolor,
+}) => {
+  let fill = `fill-[${HEXcolor}]`;
+  let stroke = `stroke-[${HEXcolor}]`;
+
   return (
     <div>
       <Radar min={1} max={maxRating} numSpokes={labels.length}>
-        <Radar.Spokes className="stroke-stone-700/50 stroke-[0.5]" />
+        <Radar.Spokes className="stroke-stone-700/50 stroke-[0.1]" />
         <Radar.Scale />
-        <Radar.Gridlines.Circle className="stroke-stone-700/50 stroke-[0.5]" />
+        <Radar.Gridlines.Circle className="stroke-stone-700/50 stroke-[0.1]" />
         <Radar.Labels labels={labels} />
 
         <Radar.plot.Line
           data={data}
-          className="fill-orange-500/50 stroke-orange-500 stroke-[0.5]"
+          className={`${fill}/50 ${stroke} stroke-[0.25]`}
         />
         <Radar.plot.Dot
           data={data}
-          className="scale-50 fill-orange-500 transition-all duration-500 hover:scale-75 hover:shadow-md"
+          className={`scale-50 ${fill} transition-all duration-500 hover:scale-75 hover:shadow-md`}
         />
         {prevData && (
           <Radar.plot.Line

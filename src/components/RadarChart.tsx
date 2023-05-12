@@ -13,7 +13,7 @@ ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip);
 
 interface props {
   values: number[];
-  color: { H: number; S: number; L: number };
+  color: colorHSL;
 }
 
 const RadarChart = ({ values, color }: props) => {
