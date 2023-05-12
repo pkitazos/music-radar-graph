@@ -1,11 +1,14 @@
-export { default as slugify } from "./slugify";
-export { default as getAccessToken } from "./getAccessToken";
+export {
+  HEXtoRGB as HEXtoRGB,
+  HSLtoRGB as HSLtoRGB,
+  RGBtoHEX as RGBtoHEX,
+  RGBtoHSL as RGBtoHSL,
+} from "./colorConverters";
 export { default as fetchProfile } from "./fetchProfile";
-export { HEXtoRGB as HEXtoRGB } from "./colorConverters";
-export { RGBtoHEX as RGBtoHEX } from "./colorConverters";
-export { RGBtoHSL as RGBtoHSL } from "./colorConverters";
-export { HSLtoRGB as HSLtoRGB } from "./colorConverters";
-
-export { getFieldNames as getFieldNames } from "./mockFunctions";
-export { getFieldValues as getFieldValues } from "./mockFunctions";
-export { generateNumerals as generateNumerals } from "./mockFunctions";
+export { default as getAccessToken } from "./getAccessToken";
+export {
+  generateNumerals as generateNumerals,
+  getFieldNames as getFieldNames,
+  getFieldValues as getFieldValues,
+} from "./mockFunctions";
+export { default as slugify } from "./slugify";

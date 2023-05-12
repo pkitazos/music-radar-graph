@@ -1,3 +1,4 @@
+import "@total-typescript/ts-reset";
 interface UserProfile {
   country: string;
   display_name: string;
