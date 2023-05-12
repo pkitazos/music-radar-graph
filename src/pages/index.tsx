@@ -28,7 +28,10 @@ const Home: NextPage = () => {
             <PageButton title="Radiohead" href="/graphs">
               rate Radiohead's discography on 5 important metrics
             </PageButton>
-            <PageButton title="the rest of the website" href="/404" />
+            <PageButton
+              title="the rest of the website"
+              href="/everywhere-else"
+            />
           </div>
         </div>
       </main>
