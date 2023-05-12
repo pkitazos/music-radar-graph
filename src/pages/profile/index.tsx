@@ -17,22 +17,19 @@ const Profile: NextPage = () => {
       <main className="flex bg-dark-base">
         <SideMenu />
         <div className="grid w-full place-content-center">
-          <h1 className="font-mono text-4xl font-semibold text-emerald-500">
+          <h1 className="font-mono text-4xl font-semibold text-secondary">
             welcome
           </h1>
-          <h1 className="font-mono text-4xl font-semibold text-fuchsia-500">
+          <h1 className="font-mono text-4xl font-semibold text-primary">
             {user?.name}
           </h1>
 
           {user ? (
-            <button className="btn-primary btn mt-6" onClick={() => signOut()}>
+            <button className="btn mt-6" onClick={() => signOut()}>
               sign out
             </button>
           ) : (
-            <button
-              className="btn-primary btn mt-6"
-              onClick={() => signIn("spotify")}
-            >
+            <button className="btn mt-6" onClick={() => signIn("spotify")}>
               sign in
             </button>
           )}
