@@ -59,7 +59,7 @@ const RangeSlider = ({ label, sliderVal, setOuter, textColor }: props) => {
         className={`input-ghost input w-1/6 bg-dark-base text-right text-xl ${textColor} sm:w-1/12 lg:mt-2.5 lg:w-1/6`}
       />
       <div className="w-10/12">
-        <div className="m-2">{label}</div>
+        <div className="m-2 font-mono">{label}</div>
         <input
           type="range"
           min="1"
@@ -71,7 +71,7 @@ const RangeSlider = ({ label, sliderVal, setOuter, textColor }: props) => {
         />
         <div className="mx-2 hidden justify-between text-xs lg:flex">
           {Array.from(Array(10)).map((_, i) => (
-            <span key={i} className="text-[8px] text-gray-500">
+            <span key={i} className="font-mono text-[8px] text-gray-500">
               |
             </span>
           ))}
