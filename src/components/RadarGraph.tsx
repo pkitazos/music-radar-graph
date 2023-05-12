@@ -1,5 +1,4 @@
 import { Radar } from "@jarp/ivy";
-import { FC } from "react";
 
 interface props {
   data: number[];
@@ -9,13 +8,7 @@ interface props {
   HEXcolor: string;
 }
 
-const RadarGraph: FC<props> = ({
-  data,
-  labels,
-  prevData,
-  maxRating,
-  HEXcolor,
-}) => {
+const RadarGraph = ({ data, labels, prevData, maxRating, HEXcolor }: props) => {
   let fill = `fill-[${HEXcolor}]`;
   let stroke = `stroke-[${HEXcolor}]`;
 

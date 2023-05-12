@@ -4,14 +4,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
-import { InfoIcon, MusicIcon, SaveIcon } from "~/SVGs";
-import { SideMenu } from "~/components";
-import RadarGraph from "~/components/RadarGraph";
+import { InfoIcon, SaveIcon } from "~/SVGs";
+import { RadarGraph, SideMenu } from "~/components";
 import { defaultChart } from "~/data";
 import { ModalProvider } from "~/hooks";
 import { pageInfo } from "~/pages/data";
 import { HSLtoRGB, RGBtoHEX, slugify } from "~/utils";
-import { api } from "~/utils/api";
 
 interface props {
   title: string;
@@ -38,6 +36,8 @@ const AlbumPage: NextPage<props> = ({ title, color, templateID }) => {
   let RGBColor = HSLtoRGB(color);
   let HEXColor = RGBtoHEX(RGBColor);
 
+  let fixedHEXColor = "#1fdf64";
+
   return (
     <>
       <Head>
@@ -59,7 +59,7 @@ const AlbumPage: NextPage<props> = ({ title, color, templateID }) => {
             </li>
           </SideMenu>
           <div className="flex h-screen w-full flex-col justify-center gap-3 px-8 py-10 sm:gap-1 md:items-center md:gap-3 lg:flex-row-reverse lg:gap-5 xl:gap-14 xl:py-16">
-            <div className="w-full md:w-max md:pt-3 lg:h-max lg:w-1/2 lg:pt-0">
+            <div className="w-full md:w-max md:pt-3 lg:h-max lg:w-2/5 lg:pt-0">
               <RadarGraph
                 data={[overall, strum, depression, society, bleep, anxiety]}
                 labels={[
@@ -71,15 +71,12 @@ const AlbumPage: NextPage<props> = ({ title, color, templateID }) => {
                   "Anxiety",
                 ]}
                 maxRating={10}
-                HEXcolor={"#1fdf64"}
+                HEXcolor={fixedHEXColor}
               />
             </div>
             <div className="grid place-items-center md:w-full lg:w-1/3 lg:min-w-fit">
               <div className="flex flex-col gap-10">
-                <h1 className="flex items-center gap-3 font-mono text-4xl font-semibold">
-                  {title}
-                  <MusicIcon className="w-5" />
-                </h1>
+                <h1 className="font-mono text-4xl font-semibold">{title}</h1>
                 <Image
                   width={300}
                   height={300}
@@ -88,7 +85,7 @@ const AlbumPage: NextPage<props> = ({ title, color, templateID }) => {
                 />
                 <Link
                   href={`/graphs${slugify(title)}/my-rating`}
-                  className="btn w-32 bg-[#1fdf64] font-mono text-xl font-semibold text-black hover:bg-[#1fdf64]/50"
+                  className={`btn-secondary btn w-32 font-mono text-xl font-semibold`}
                 >
                   rate it
                 </Link>
