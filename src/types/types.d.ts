@@ -21,3 +21,9 @@ interface Image {
   height: number;
   width: number;
 }
+
+type colorHSL = { H: number; S: number; L: number };
+
+type colorRGB = { R: number; G: number; B: number };
+
+type colorLab = { L: number; a: number; b: number };
