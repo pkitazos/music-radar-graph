@@ -9,24 +9,23 @@ interface props {
 }
 
 const RadarGraph = ({ data, labels, prevData, maxRating, HEXcolor }: props) => {
-  let fill = `fill-[${HEXcolor}]`;
-  let stroke = `stroke-[${HEXcolor}]`;
-
   return (
     <div>
       <Radar min={1} max={maxRating} numSpokes={labels.length}>
         <Radar.Spokes className="stroke-stone-700/50 stroke-[0.1]" />
-        <Radar.Scale />
+        <Radar.Scale className="fill-none" />
         <Radar.Gridlines.Circle className="stroke-stone-700/50 stroke-[0.1]" />
-        <Radar.Labels labels={labels} />
+        <Radar.Labels labels={labels} className="fill-none" />
 
         <Radar.plot.Line
           data={data}
-          className={`${fill}/50 ${stroke} stroke-[0.25]`}
+          className="stroke-[0.25]"
+          style={{ fill: `${HEXcolor}80`, stroke: HEXcolor }}
         />
         <Radar.plot.Dot
           data={data}
-          className={`scale-50 ${fill} transition-all duration-500 hover:scale-75 hover:shadow-md`}
+          className={`scale-50 transition-all duration-500 hover:scale-75 hover:shadow-md`}
+          style={{ fill: HEXcolor }}
         />
         {prevData && (
           <Radar.plot.Line
