@@ -8,3 +8,4 @@ export { default as RadarIcon } from "./RadarIcon";
 export { default as SaveIcon } from "./SaveIcon";
 export { default as TickIcon } from "./TickIcon";
 export { default as DiscIcon } from "./DiscIcon";
+export { default as UserIcon } from "./UserIcon";

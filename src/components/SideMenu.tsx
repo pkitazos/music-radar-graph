@@ -1,8 +1,9 @@
 import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { ReactNode } from "react";
-import { DiscIcon, InfoIcon, MapIcon } from "~/SVGs";
-import UserIcon from "~/SVGs/UserIcon";
+
+import { DiscIcon, InfoIcon, MapIcon, UserIcon } from "~/SVGs";
 
 interface props {
   children?: ReactNode[];
@@ -12,11 +13,14 @@ const SideMenu = ({ children }: props) => {
   let { data: session } = useSession();
   let user = session?.user;
 
+  const router = useRouter();
+  let path = router.pathname;
+
   return (
     <div className="left-0 top-0 h-screen">
       <ul className="menu rounded-box w-max gap-1 p-2">
         <li className="tooltip tooltip-right" data-tip="Info">
-          <div className="text-accent hover:bg-slate-800/50">
+          <div className="hover:bg-slate-800/50">
             <InfoIcon />
           </div>
         </li>
@@ -56,12 +60,22 @@ const SideMenu = ({ children }: props) => {
         <div className="divider" />
 
         <li className="tooltip tooltip-right" data-tip="Where am I going?">
-          <Link href="/" className="hover:bg-slate-800/50">
+          <Link
+            href="/"
+            className={` ${
+              path == "/" && "text-lime-500"
+            } hover:bg-slate-800/50`}
+          >
             <MapIcon />
           </Link>
         </li>
         <li className="tooltip tooltip-right" data-tip="Album selection">
-          <Link href="/graphs" className="hover:bg-slate-800/50">
+          <Link
+            href="/graphs"
+            className={` ${
+              path.startsWith("/graphs") && "text-lime-500"
+            } hover:bg-slate-800/50`}
+          >
             <DiscIcon />
           </Link>
         </li>
