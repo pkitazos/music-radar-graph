@@ -5,3 +5,7 @@ export { HEXtoRGB as HEXtoRGB } from "./colorConverters";
 export { RGBtoHEX as RGBtoHEX } from "./colorConverters";
 export { RGBtoHSL as RGBtoHSL } from "./colorConverters";
 export { HSLtoRGB as HSLtoRGB } from "./colorConverters";
+
+export { getFieldNames as getFieldNames } from "./mockFunctions";
+export { getFieldValues as getFieldValues } from "./mockFunctions";
+export { generateNumerals as generateNumerals } from "./mockFunctions";

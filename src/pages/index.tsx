@@ -1,20 +1,9 @@
 import { type NextPage } from "next";
 import Head from "next/head";
-import { useState } from "react";
 
 import { PageButton, SideMenu } from "~/components";
-import { defaultChart } from "~/data";
-import { api } from "~/utils/api";
 
 const Home: NextPage = () => {
-  const [selected, setSelected] = useState(0);
-
-  const [chartData, setChartData] = useState<chartData[]>([
-    { ...defaultChart },
-  ]);
-  let { data, status, error, isSuccess } =
-    api.accountRouter.getSpotifyProfile.useQuery();
-
   return (
     <>
       <Head>

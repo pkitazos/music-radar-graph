@@ -5,10 +5,9 @@ interface props {
   label: ReactNode;
   sliderVal: number;
   setOuter: (x: number) => void;
-  textColor: string;
 }
 
-const RangeSlider = ({ label, sliderVal, setOuter, textColor }: props) => {
+const RangeSlider = ({ label, sliderVal, setOuter }: props) => {
   const [preProcess, setPreProcess] = useState("5");
 
   const isMedium = useMediaQuery("(min-width: 768px)");
@@ -56,7 +55,7 @@ const RangeSlider = ({ label, sliderVal, setOuter, textColor }: props) => {
         max={10}
         value={preProcess}
         onChange={handleInputChange}
-        className={`input-ghost input w-1/6 bg-dark-base text-right text-xl ${textColor} sm:w-1/12 lg:mt-2.5 lg:w-1/6`}
+        className={`input-ghost input w-1/6 bg-dark-base text-right text-xl text-secondary sm:w-1/12 lg:mt-2.5 lg:w-1/6`}
       />
       <div className="w-10/12">
         <div className="m-2 font-mono">{label}</div>

@@ -2,41 +2,33 @@ import { GetStaticPaths, GetStaticProps, type NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
 
 import { InfoIcon, SaveIcon } from "~/SVGs";
 import { RadarGraph, SideMenu } from "~/components";
-import { defaultChart } from "~/data";
-import { ModalProvider } from "~/hooks";
+import { ModalProvider, useMediaQuery } from "~/hooks";
 import { pageInfo } from "~/pages/data";
-import { HSLtoRGB, RGBtoHEX, slugify } from "~/utils";
+import {
+  generateNumerals,
+  getFieldNames,
+  getFieldValues,
+  slugify,
+} from "~/utils";
 
 interface props {
   title: string;
-  color: colorHSL;
   templateID: string;
 }
 
-const AlbumPage: NextPage<props> = ({ title, color, templateID }) => {
-  const [selected, setSelected] = useState(0);
+const AlbumPage: NextPage<props> = ({ title, templateID }) => {
+  const fieldNames = getFieldNames();
+  const fieldValues = getFieldValues();
+  const numerals = generateNumerals(fieldNames);
 
-  const [chartData, setChartData] = useState<chartData[]>([
-    { ...defaultChart },
-  ]);
+  const isLarge = useMediaQuery("(min-width: 1024px)");
 
-  // let {
-  //   data: albumChartData,
-  //   status,
-  //   error,
-  // } = api.templateRouter.getTemplateAverage.useQuery(templateID);
+  const labels = !isLarge ? numerals : fieldNames;
 
-  const { overall, strum, depression, society, bleep, anxiety } =
-    chartData[selected]!;
-
-  let RGBColor = HSLtoRGB(color);
-  let HEXColor = RGBtoHEX(RGBColor);
-
-  let fixedHEXColor = "#1fdf64";
+  const fixedHEXColor = "#1fdf64";
 
   return (
     <>
@@ -61,15 +53,8 @@ const AlbumPage: NextPage<props> = ({ title, color, templateID }) => {
           <div className="flex h-screen w-full flex-col justify-center gap-3 px-8 py-10 sm:gap-1 md:items-center md:gap-3 lg:flex-row-reverse lg:gap-5 xl:gap-14 xl:py-16">
             <div className="w-full md:w-max md:pt-3 lg:h-max lg:w-2/5 lg:pt-0">
               <RadarGraph
-                data={[overall, strum, depression, society, bleep, anxiety]}
-                labels={[
-                  "Overall",
-                  "Strum Strum",
-                  "Depression",
-                  "We Live in a Society",
-                  "Bleep Bloop",
-                  "Anxiety",
-                ]}
+                data={fieldValues}
+                labels={labels}
                 maxRating={10}
                 HEXcolor={fixedHEXColor}
               />
@@ -85,7 +70,7 @@ const AlbumPage: NextPage<props> = ({ title, color, templateID }) => {
                 />
                 <Link
                   href={`/graphs${slugify(title)}/my-rating`}
-                  className={`btn-secondary btn w-32 font-mono text-xl font-semibold`}
+                  className={`btn-primary btn w-32 font-mono text-xl font-semibold text-pink-950`}
                 >
                   rate it
                 </Link>

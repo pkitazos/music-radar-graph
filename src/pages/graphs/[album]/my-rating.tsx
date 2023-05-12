@@ -4,53 +4,27 @@ import { useState } from "react";
 
 import { InfoIcon, SaveIcon } from "~/SVGs";
 import { RadarGraph, RangeSlider, SideMenu } from "~/components";
-import { defaultChart } from "~/data";
 import { ModalProvider, useMediaQuery } from "~/hooks";
 import { pageInfo } from "~/pages/data";
-import { HSLtoRGB, RGBtoHEX } from "~/utils";
+import { generateNumerals, getFieldNames, getFieldValues } from "~/utils";
 
 interface props {
   title: string;
-  color: { H: number; S: number; L: number };
   templateID: string;
 }
 
-const AlbumRatingPage: NextPage<props> = ({ title, color, templateID }) => {
-  const [selected, setSelected] = useState(0);
-
-  const [chartData, setChartData] = useState<chartData[]>([
-    { ...defaultChart },
-  ]);
-
-  const { overall, strum, depression, society, bleep, anxiety } =
-    chartData[selected]!;
-
-  const keys = [
-    "overall",
-    "strum",
-    "depression",
-    "society",
-    "bleep",
-    "anxiety",
-  ];
+const AlbumRatingPage: NextPage<props> = ({ title, templateID }) => {
+  const fieldNames = getFieldNames();
+  const fieldValues = getFieldValues();
+  const numerals = generateNumerals(fieldNames);
 
   const isLarge = useMediaQuery("(min-width: 1024px)");
 
-  const numerals = ["I", "II", "III", "IV", "VI", "VI"];
-  const fullLabels = [
-    "Overall",
-    "Strum Strum",
-    "Depression",
-    "We Live in a Society",
-    "Bleep Bloop",
-    "Anxiety",
-  ];
-  const labels = !isLarge ? numerals : fullLabels;
+  const labels = !isLarge ? numerals : fieldNames;
 
-  let RGBColor = HSLtoRGB(color);
-  let HEXColor = RGBtoHEX(RGBColor);
+  const [chartData, setChartData] = useState<number[]>([...fieldValues]);
 
-  let fixedHEXColor = "#1fdf64";
+  const fixedHEXColor = "#1fdf64";
 
   return (
     <>
@@ -78,15 +52,9 @@ const AlbumRatingPage: NextPage<props> = ({ title, color, templateID }) => {
           <div className="flex h-screen w-full flex-col justify-center gap-3 px-8 py-10 sm:gap-1 md:items-center md:gap-3 lg:flex-row-reverse lg:gap-5 xl:gap-14 xl:py-16">
             <div className="md:w-max md:pt-3 lg:w-2/5 lg:pt-0">
               <RadarGraph
-                data={[overall, strum, depression, society, bleep, anxiety]}
-                labels={[
-                  "Overall",
-                  "Strum Strum",
-                  "Depression",
-                  "We Live in a Society",
-                  "Bleep Bloop",
-                  "Anxiety",
-                ]}
+                prevData={fieldValues}
+                data={chartData}
+                labels={labels}
                 maxRating={10}
                 HEXcolor={fixedHEXColor}
               />
@@ -97,29 +65,30 @@ const AlbumRatingPage: NextPage<props> = ({ title, color, templateID }) => {
               </h1>
 
               <div className="w-max">
-                {keys.map((key, i) => (
+                {chartData.map((item, i) => (
                   <RangeSlider
                     key={i}
-                    textColor={`text-[${fixedHEXColor}]`}
                     label={
                       <div>
-                        {isLarge && numerals[i] + " - "} {fullLabels[i]}
+                        {isLarge && `${numerals[i]} - `} {fieldNames[i]}
                       </div>
                     }
-                    sliderVal={
-                      chartData[selected]![key as keyof chartData] as number
-                    }
+                    sliderVal={item}
                     setOuter={(x) => {
                       let clone = [...chartData];
-                      //@ts-ignore
-                      clone[selected][key as keyof chartData] = x;
+                      clone[i] = x;
                       setChartData(clone);
                     }}
                   />
                 ))}
               </div>
               <div className="mt-8 flex w-full justify-end gap-8">
-                <button className="btn w-32 font-mono text-xl font-semibold">
+                <button
+                  className="btn w-32 font-mono text-xl font-semibold"
+                  onClick={() => {
+                    setChartData([...fieldValues]);
+                  }}
+                >
                   reset
                 </button>
                 <button className="btn-primary btn w-32 font-mono text-xl font-semibold text-pink-950">
