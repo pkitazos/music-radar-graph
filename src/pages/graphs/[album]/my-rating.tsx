@@ -118,7 +118,10 @@ const AlbumRatingPage: NextPage<props> = ({ title, color, templateID }) => {
                   />
                 ))}
               </div>
-              <div className="mt-8 flex w-full justify-end">
+              <div className="mt-8 flex w-full justify-end gap-8">
+                <button className="btn w-32 font-mono text-xl font-semibold">
+                  reset
+                </button>
                 <button className="btn-primary btn w-32 font-mono text-xl font-semibold text-pink-950">
                   save
                 </button>
