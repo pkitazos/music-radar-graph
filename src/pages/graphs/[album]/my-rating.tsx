@@ -34,21 +34,7 @@ const AlbumRatingPage: NextPage<props> = ({ title, templateID }) => {
       </Head>
       <main className="flex flex-row bg-dark-base">
         <ModalProvider>
-          <SideMenu>
-            <li>
-              <div className="hover:bg-slate-800/50">
-                <InfoIcon />
-              </div>
-            </li>
-            <li
-              className="tooltip tooltip-right"
-              data-tip="Save when you're done"
-            >
-              <div className="text-secondary hover:bg-slate-800/50">
-                <SaveIcon />
-              </div>
-            </li>
-          </SideMenu>
+          <SideMenu />
           <div className="flex h-screen w-full flex-col justify-center gap-3 px-8 py-10 sm:gap-1 md:items-center md:gap-3 lg:flex-row-reverse lg:gap-5 xl:gap-14 xl:py-16">
             <div className="md:w-max md:pt-3 lg:w-2/5 lg:pt-0">
               <RadarGraph

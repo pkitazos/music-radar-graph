@@ -38,18 +38,7 @@ const AlbumPage: NextPage<props> = ({ title, templateID }) => {
       </Head>
       <main className="flex bg-dark-base">
         <ModalProvider>
-          <SideMenu>
-            <li>
-              <div className="hover:bg-zinc-900/50">
-                <InfoIcon />
-              </div>
-            </li>
-            <li>
-              <div className=" hover:bg-zinc-900/50">
-                <SaveIcon />
-              </div>
-            </li>
-          </SideMenu>
+          <SideMenu />
           <div className="flex h-screen w-full flex-col justify-center gap-3 px-8 py-10 sm:gap-1 md:items-center md:gap-3 lg:flex-row-reverse lg:gap-5 xl:gap-14 xl:py-16">
             <div className="w-full md:w-max md:pt-3 lg:h-max lg:w-2/5 lg:pt-0">
               <RadarGraph
