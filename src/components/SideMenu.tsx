@@ -16,7 +16,7 @@ const SideMenu = ({ children }: props) => {
     <div className="left-0 top-0 h-screen">
       <ul className="menu rounded-box w-max gap-1 p-2">
         <li className="tooltip tooltip-right" data-tip="Info">
-          <div className="text-yellow-500 hover:bg-slate-800/50">
+          <div className="text-accent hover:bg-slate-800/50">
             <InfoIcon />
           </div>
         </li>
