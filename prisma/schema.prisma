@@ -27,6 +27,7 @@ enum Visibility {
 // information about a particular field
 model FieldTemplate {
     ID              String          @id @default(cuid())
+    fieldIndex      Int
     name            String
     for             GraphTemplate   @relation(fields: [graphTemplateID], references: [ID])
     graphTemplateID String
@@ -56,8 +57,8 @@ model GraphTemplate {
     maxValue       Int
     visibility     Visibility
     templateFields FieldTemplate[]
-    owner          User            @relation(fields: [ownerID], references: [id])
-    ownerID        String
+    owner          User?           @relation(fields: [ownerID], references: [id])
+    ownerID        String?
     GraphInstance  GraphInstance[]
 
     @@index([ownerID])
@@ -71,8 +72,8 @@ model GraphInstance {
     for             GraphTemplate   @relation(fields: [graphTemplateID], references: [ID])
     graphTemplateID String
     values          FieldInstance[]
-    user            User            @relation(fields: [userID], references: [id])
-    userID          String
+    user            User?           @relation(fields: [userID], references: [id])
+    userID          String?
 
     @@index([graphTemplateID])
     @@index([userID])

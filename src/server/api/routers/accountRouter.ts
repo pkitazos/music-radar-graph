@@ -1,7 +1,7 @@
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 import { getAccessToken, fetchProfile } from "~/utils";
 
-export const accountRouter = createTRPCRouter({
+const accountRouter = createTRPCRouter({
   getAccessToken: publicProcedure.query(async ({ ctx }) => {
     if (!ctx.session) return;
 
@@ -26,3 +26,5 @@ export const accountRouter = createTRPCRouter({
     return spotifyProfile;
   }),
 });
+
+export default accountRouter;

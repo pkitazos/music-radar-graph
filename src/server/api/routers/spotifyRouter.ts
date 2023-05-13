@@ -3,7 +3,7 @@ import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 import { fetchAlbumsSchema } from "~/types/fetchAlbumsSchema";
 import getAccessToken from "~/utils/getAccessToken";
 
-export const spotifyRouter = createTRPCRouter({
+const spotifyRouter = createTRPCRouter({
   getSearchRequest: publicProcedure
     .input(z.string())
     .query(async ({ ctx, input }) => {
@@ -20,3 +20,5 @@ export const spotifyRouter = createTRPCRouter({
         .then((e) => fetchAlbumsSchema.parse(e));
     }),
 });
+
+export default spotifyRouter;
