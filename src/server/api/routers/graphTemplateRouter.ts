@@ -1,4 +1,3 @@
-import { Visibility } from "@prisma/client";
 import { z } from "zod";
 
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
@@ -26,20 +25,12 @@ const graphTemplateRouter = createTRPCRouter({
       })
     )
     .mutation(async ({ ctx, input }) => {
-      let ownerID = null;
-      let visibility: Visibility = "UNLISTED";
-
-      if (ctx.session) {
-        ownerID = ctx.session.user.id;
-        visibility = input.visibility;
-      }
-
       const graphTemplate = await ctx.prisma.graphTemplate.create({
         data: {
           mediaID: input.mediaID,
           maxValue: input.maxRating,
-          visibility: visibility,
-          ownerID: ownerID,
+          visibility: input.visibility,
+          ownerID: ctx.session!.user.id,
           templateFields: {
             create: [
               ...input.fieldNames.map((fieldName, i) => {

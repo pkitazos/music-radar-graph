@@ -14,8 +14,8 @@ datasource db {
 // Content refers to either an Album or an individual Track
 model Media {
     mediaID       String          @id @default(cuid()) @map("contentId")
-    GraphTemplate GraphTemplate[]
-    GraphInstance GraphInstance[]
+    graphTemplate GraphTemplate[]
+    graphInstance GraphInstance[]
 }
 
 enum Visibility {
@@ -57,9 +57,10 @@ model GraphTemplate {
     maxValue       Int
     visibility     Visibility
     templateFields FieldTemplate[]
-    owner          User?           @relation(fields: [ownerID], references: [id])
-    ownerID        String?
-    GraphInstance  GraphInstance[]
+    owner          User            @relation(fields: [ownerID], references: [id])
+    ownerID        String
+    graphInstance  GraphInstance[]
+    global         Boolean
 
     @@index([ownerID])
     @@index([mediaID])
@@ -72,11 +73,11 @@ model GraphInstance {
     for             GraphTemplate   @relation(fields: [graphTemplateID], references: [ID])
     graphTemplateID String
     values          FieldInstance[]
-    user            User?           @relation(fields: [userID], references: [id])
-    userID          String?
+    submitter       User?           @relation(fields: [submitterID], references: [id])
+    submitterID     String?
 
     @@index([graphTemplateID])
-    @@index([userID])
+    @@index([submitterID])
     @@index([mediaID])
 }
 
@@ -118,8 +119,8 @@ model User {
     image         String?
     accounts      Account[]
     sessions      Session[]
-    GraphTemplate GraphTemplate[]
-    GraphInstance GraphInstance[]
+    graphTemplate GraphTemplate[]
+    graphInstance GraphInstance[]
 }
 
 model VerificationToken {
