@@ -6,7 +6,7 @@ import { InfoIcon, SaveIcon } from "~/SVGs";
 import { RadarGraph, RangeSlider, SideMenu } from "~/components";
 import { ModalProvider, useMediaQuery } from "~/hooks";
 import { pageInfo } from "~/data";
-import { generateNumerals, getFieldNames, getFieldValues } from "~/utils";
+import { generateNumerals } from "~/utils";
 
 interface props {
   title: string;
@@ -14,8 +14,15 @@ interface props {
 }
 
 const AlbumRatingPage: NextPage<props> = ({ title, templateID }) => {
-  const fieldNames = getFieldNames();
-  const fieldValues = getFieldValues();
+  const fieldNames = [
+    "field 1",
+    "field 2",
+    "field 3",
+    "field 4",
+    "field 5",
+    "field 6",
+  ];
+  const fieldValues = [5, 5, 5, 5, 5, 5];
   const numerals = generateNumerals(fieldNames);
 
   const isLarge = useMediaQuery("(min-width: 1024px)");

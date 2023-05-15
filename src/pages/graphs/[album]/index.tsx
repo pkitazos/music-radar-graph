@@ -3,16 +3,10 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 
-import { InfoIcon, SaveIcon } from "~/SVGs";
 import { RadarGraph, SideMenu } from "~/components";
-import { ModalProvider, useMediaQuery } from "~/hooks";
 import { pageInfo } from "~/data";
-import {
-  generateNumerals,
-  getFieldNames,
-  getFieldValues,
-  slugify,
-} from "~/utils";
+import { ModalProvider, useMediaQuery } from "~/hooks";
+import { api, generateNumerals, slugify } from "~/utils";
 
 interface props {
   title: string;
@@ -20,15 +14,24 @@ interface props {
 }
 
 const AlbumPage: NextPage<props> = ({ title, templateID }) => {
-  const fieldNames = getFieldNames();
-  const fieldValues = getFieldValues();
-  const numerals = generateNumerals(fieldNames);
+  const {
+    data: graphTemplate,
+    isLoading,
+    error,
+  } = api.templateRouter.getGraphTemplateAggregate.useQuery(templateID);
 
   const isLarge = useMediaQuery("(min-width: 1024px)");
+  if (!graphTemplate) return <></>;
+
+  const fieldNames = Object.keys(graphTemplate);
+  const fieldValues = Object.values(graphTemplate);
+  const numerals = generateNumerals(fieldNames);
 
   const labels = !isLarge ? numerals : fieldNames;
 
   const fixedHEXColor = "#1fdf64";
+
+  console.log({ graphTemplate });
 
   return (
     <>
@@ -41,12 +44,16 @@ const AlbumPage: NextPage<props> = ({ title, templateID }) => {
           <SideMenu />
           <div className="flex h-screen w-full flex-col justify-center gap-3 px-8 py-10 sm:gap-1 md:items-center md:gap-3 lg:flex-row-reverse lg:gap-5 xl:gap-14 xl:py-16">
             <div className="w-full md:w-max md:pt-3 lg:h-max lg:w-2/5 lg:pt-0">
-              <RadarGraph
-                data={fieldValues}
-                labels={labels}
-                maxRating={10}
-                HEXcolor={fixedHEXColor}
-              />
+              {isLoading ? (
+                <div>loading</div>
+              ) : (
+                <RadarGraph
+                  data={fieldValues}
+                  labels={labels}
+                  maxRating={10}
+                  HEXcolor={fixedHEXColor}
+                />
+              )}
             </div>
             <div className="grid place-items-center md:w-full lg:w-1/3 lg:min-w-fit">
               <div className="flex flex-col gap-10">

@@ -44,10 +44,37 @@ const templateRouter = createTRPCRouter({
       return graphTemplate;
     }),
 
+  getGraphTemplateAggregate: publicProcedure
+    .input(z.string())
+    .query(async ({ ctx, input: templateID }) => {
+      const fields = await ctx.prisma.fieldTemplate.findMany({
+        where: {
+          graphTemplateID: templateID,
+        },
+      });
+      const sortedFields = fields.sort((item) => item.fieldIndex);
+
+      let x = await Promise.all(
+        sortedFields.map(async (field) => {
+          let instanceAverage = await ctx.prisma.fieldInstance.aggregate({
+            where: {
+              fieldID: field.ID,
+            },
+            _avg: {
+              value: true,
+            },
+          });
+          return instanceAverage._avg.value || 5;
+        })
+      );
+
+      return x;
+    }),
+
   getGraphTemplateFieldNames: publicProcedure
     .input(z.string())
     .query(async ({ ctx, input: templateID }) => {
-      let fields = await ctx.prisma.fieldTemplate.findMany({
+      const fields = await ctx.prisma.fieldTemplate.findMany({
         where: {
           graphTemplateID: templateID,
         },
@@ -58,7 +85,7 @@ const templateRouter = createTRPCRouter({
   getGraphTemplateAverage: publicProcedure
     .input(z.string())
     .query(async ({ ctx, input: templateID }) => {
-      let fields = await ctx.prisma.fieldTemplate.findMany({
+      const fields = await ctx.prisma.fieldTemplate.findMany({
         where: {
           graphTemplateID: templateID,
         },
