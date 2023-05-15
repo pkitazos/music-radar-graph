@@ -63,8 +63,9 @@ const templateRouter = createTRPCRouter({
           graphTemplateID: templateID,
         },
       });
+      const sortedFields = fields.sort((item) => item.fieldIndex);
 
-      return fields.reduce(async (acc, val) => {
+      return sortedFields.reduce(async (acc, val) => {
         return {
           ...acc,
           [val.name]:
