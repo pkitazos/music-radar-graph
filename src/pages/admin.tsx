@@ -5,8 +5,11 @@ import { SideMenu } from "~/components";
 import { api } from "~/utils";
 
 const Profile: NextPage = () => {
-  let { mutate: addFeaturedTemplates } =
-    api.adminRouter.addFeatureAlbums.useMutation();
+  // let { mutate: addFeaturedTemplates } =
+  //   api.adminRouter.addFeatureAlbums.useMutation();
+
+  // let { mutate: addFirstInstances } =
+  //   api.adminRouter.addFirstInstance.useMutation();
 
   return (
     <>
@@ -18,12 +21,20 @@ const Profile: NextPage = () => {
         <SideMenu />
         <div className="grid w-full place-content-center">
           <h1>Hey! You shouldn't be here! Naughty!</h1>
-          {/* <button
+          <div className="mt-4">
+            {/* <button
             className="btn-error btn"
             onClick={() => addFeaturedTemplates()}
           >
-            CLICK
+            CREATE TEMPLATES
           </button> */}
+            {/* <button
+              className="btn-error btn w-max transition-all hover:scale-[1.02]"
+              onClick={() => addFirstInstances()}
+            >
+              CREATE INSTANCES
+            </button> */}
+          </div>
         </div>
       </main>
     </>

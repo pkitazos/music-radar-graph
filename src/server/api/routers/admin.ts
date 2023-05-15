@@ -35,6 +35,37 @@ const adminRouter = createTRPCRouter({
 
     return featuredAlbums;
   }),
+
+  addFirstInstance: publicProcedure.mutation(async ({ ctx }) => {
+    let graphTemplates = await ctx.prisma.graphTemplate.findMany({
+      where: {
+        featured: true,
+      },
+    });
+
+    return graphTemplates.map(async (template) => {
+      let fieldTemplates = await ctx.prisma.fieldTemplate.findMany({
+        where: {
+          graphTemplateID: template.ID,
+        },
+      });
+
+      return await ctx.prisma.graphInstance.create({
+        data: {
+          mediaID: template.mediaID,
+          graphTemplateID: template.ID,
+          values: {
+            create: fieldTemplates.map((field, i) => {
+              return {
+                fieldID: field.ID,
+                value: 5,
+              };
+            }),
+          },
+        },
+      });
+    });
+  }),
 });
 
 export default adminRouter;
