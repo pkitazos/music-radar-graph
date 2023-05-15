@@ -2,10 +2,11 @@ import { type NextPage } from "next";
 import Head from "next/head";
 
 import { SideMenu } from "~/components";
+import { api } from "~/utils";
 
 const Profile: NextPage = () => {
-  //   let { mutate: addFeaturedTemplates } =
-  //     api.adminRouter.addFeatureAlbums.useMutation();
+  let { mutate: addFeaturedTemplates } =
+    api.adminRouter.addFeatureAlbums.useMutation();
 
   return (
     <>

@@ -12,3 +12,4 @@ export {
   getFieldValues as getFieldValues,
 } from "./mockFunctions";
 export { default as slugify } from "./slugify";
+export { api as api } from "./api";

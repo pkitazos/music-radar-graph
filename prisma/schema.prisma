@@ -14,6 +14,8 @@ datasource db {
 // Content refers to either an Album or an individual Track
 model Media {
     mediaID       String          @id @default(cuid()) @map("contentId")
+    name          String
+    imageURL      String
     graphTemplate GraphTemplate[]
     graphInstance GraphInstance[]
 }

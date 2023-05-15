@@ -14,7 +14,7 @@ const adminRouter = createTRPCRouter({
     ];
     let featuredAlbums = albumIDs.map(async (album) => {
       await ctx.prisma.media.create({
-        data: { mediaID: album.id },
+        data: { mediaID: album.id, name: album.name, imageURL: album.imageURL },
       });
 
       return await ctx.prisma.graphTemplate.create({
@@ -32,12 +32,6 @@ const adminRouter = createTRPCRouter({
         },
       });
     });
-
-    // const featuredAlbums = await ctx.prisma.graphTemplate.createMany({
-    //   data: albumIDs.map((album) => {
-    //     return {};
-    //   }),
-    // });
 
     return featuredAlbums;
   }),
