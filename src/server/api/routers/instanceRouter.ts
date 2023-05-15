@@ -2,7 +2,7 @@ import { z } from "zod";
 
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 
-const graphInstanceRouter = createTRPCRouter({
+const instanceRouter = createTRPCRouter({
   getGraphInstance: publicProcedure
     .input(z.string())
     .query(async ({ ctx, input: instanceID }) => {
@@ -15,7 +15,7 @@ const graphInstanceRouter = createTRPCRouter({
       return graphInstance;
     }),
 
-  createGraphInstance: publicProcedure
+  upsertGraphInstance: publicProcedure
     .input(
       z.object({ graphTemplateID: z.string(), ratings: z.array(z.number()) })
     )
@@ -28,26 +28,35 @@ const graphInstanceRouter = createTRPCRouter({
 
       const sortedFields = fields.sort((item) => item.fieldIndex);
 
-      const getMediaID = await ctx.prisma.graphTemplate.findUniqueOrThrow({
+      const { mediaID } = await ctx.prisma.graphTemplate.findUniqueOrThrow({
         where: { ID: input.graphTemplateID },
         select: { mediaID: true },
       });
 
-      const graphInstance = await ctx.prisma.graphInstance.create({
-        data: {
-          graphTemplateID: input.graphTemplateID,
-          mediaID: getMediaID.mediaID,
-          values: {
-            create: [
-              ...input.ratings.map((value, i) => {
-                return { value: value, fieldID: sortedFields[i]!.ID };
-              }),
-            ],
+      let data = {
+        graphTemplateID: input.graphTemplateID,
+        mediaID,
+        values: {
+          create: [
+            ...input.ratings.map((value, i) => {
+              return { value: value, fieldID: sortedFields[i]!.ID };
+            }),
+          ],
+        },
+      };
+
+      const graphInstance = await ctx.prisma.graphInstance.upsert({
+        where: {
+          instanceIdentifier: {
+            graphTemplateID: input.graphTemplateID,
+            submitterID: ctx.session!.user.id,
           },
         },
+        create: data,
+        update: data,
       });
       return graphInstance;
     }),
 });
 
-export default graphInstanceRouter;
+export default instanceRouter;

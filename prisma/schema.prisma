@@ -60,7 +60,7 @@ model GraphTemplate {
     owner          User            @relation(fields: [ownerID], references: [id])
     ownerID        String
     graphInstance  GraphInstance[]
-    global         Boolean
+    featured       Boolean         @default(false)
 
     @@index([ownerID])
     @@index([mediaID])
@@ -76,6 +76,7 @@ model GraphInstance {
     submitter       User?           @relation(fields: [submitterID], references: [id])
     submitterID     String?
 
+    @@unique([graphTemplateID, submitterID], name: "instanceIdentifier")
     @@index([graphTemplateID])
     @@index([submitterID])
     @@index([mediaID])

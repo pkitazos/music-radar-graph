@@ -2,7 +2,7 @@ import { z } from "zod";
 
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 
-const graphTemplateRouter = createTRPCRouter({
+const templateRouter = createTRPCRouter({
   getGraphTemplate: publicProcedure
     .input(z.string())
     .query(async ({ ctx, input: templateID }) => {
@@ -83,4 +83,4 @@ const graphTemplateRouter = createTRPCRouter({
     }),
 });
 
-export default graphTemplateRouter;
+export default templateRouter;
