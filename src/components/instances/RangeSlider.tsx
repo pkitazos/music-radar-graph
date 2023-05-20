@@ -48,7 +48,7 @@ const RangeSlider = ({ label, sliderVal, setOuter }: props) => {
 
   return (
     <div
-      className={`my-2 flex flex-row items-end justify-center gap-x-4 sm:my-3 md:mx-auto md:my-2 md:w-[40rem] lg:my-5 lg:w-full lg:items-center`}
+      className={`my-2 flex flex-row items-end justify-center gap-x-4 sm:my-3 md:mx-auto md:my-2 md:w-[40rem] lg:my-2 lg:w-full lg:items-center`}
     >
       <input
         type="number"

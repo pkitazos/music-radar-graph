@@ -1,4 +1,6 @@
 import { Radar } from "@jarp/ivy";
+import { useMediaQuery } from "~/hooks";
+import { generateNumerals } from "~/utils";
 
 interface props {
   data: number[];
@@ -8,7 +10,18 @@ interface props {
   HEXcolor: string;
 }
 
-const RadarGraph = ({ data, labels, prevData, maxRating, HEXcolor }: props) => {
+const RadarGraph = ({
+  data,
+  labels: fieldNames,
+  prevData,
+  maxRating,
+  HEXcolor,
+}: props) => {
+  const numerals = generateNumerals(fieldNames);
+
+  const isLarge = useMediaQuery("(min-width: 1024px)");
+  const labels = !isLarge ? numerals : fieldNames;
+
   return (
     <div>
       <Radar min={1} max={maxRating} numSpokes={labels.length}>

@@ -1,4 +1,4 @@
-import { FC, KeyboardEventHandler, useEffect, useRef, useState } from "react";
+import { KeyboardEventHandler, useEffect, useRef, useState } from "react";
 
 import { CloseIcon, TickIcon } from "~/SVGs";
 import { useModal } from "~/hooks";
@@ -7,7 +7,7 @@ interface props {
   setAlbum: (name: string) => void;
 }
 
-const AlbumModal: FC<props> = ({ setAlbum }) => {
+const AlbumModal = ({ setAlbum }: props) => {
   const [val, setVal] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
   const enterRef = useRef<HTMLButtonElement>(null);

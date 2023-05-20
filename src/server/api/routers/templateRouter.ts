@@ -54,7 +54,7 @@ const templateRouter = createTRPCRouter({
       });
       const sortedFields = fields.sort((item) => item.fieldIndex);
 
-      let x = await Promise.all(
+      let aggregateFieldValues = await Promise.all(
         sortedFields.map(async (field) => {
           let instanceAverage = await ctx.prisma.fieldInstance.aggregate({
             where: {
@@ -68,7 +68,11 @@ const templateRouter = createTRPCRouter({
         })
       );
 
-      return x;
+      const aggregateTemplateData = {
+        fieldNames: sortedFields.map((field) => field.name),
+        fieldValues: aggregateFieldValues,
+      };
+      return aggregateTemplateData;
     }),
 
   getGraphTemplateFieldNames: publicProcedure
