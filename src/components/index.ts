@@ -2,4 +2,4 @@ export { default as AlbumModal } from "./AlbumModal";
 export { default as RadarGraph } from "./RadarGraph";
 export { Loading, PageButton, SideMenu } from "./base";
 export { RangeSlider, InstanceArea, SliderArea } from "./instances";
-export { AlbumButton, TemplateArea } from "./templates";
+export { AlbumButton, InputField } from "./templates";

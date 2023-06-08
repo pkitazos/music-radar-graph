@@ -40,8 +40,14 @@ const InstanceArea = ({
           />
 
           <div className="mt-8 flex w-full justify-end gap-8">
-            <button
+            <Link
+              href={`/graphs/${slugify(title)}`}
               className="btn w-32 font-mono text-xl font-semibold"
+            >
+              cancel
+            </Link>
+            <button
+              className="btn-info btn w-32 font-mono text-xl font-semibold"
               onClick={() => {
                 setChartData([...fieldValues]);
               }}
@@ -53,11 +59,12 @@ const InstanceArea = ({
               className="btn-primary btn w-32 font-mono text-xl font-semibold text-pink-950"
             >
               <button
+                className="uppercase"
                 onClick={() =>
                   mutate({ graphTemplateID: templateID, ratings: chartData })
                 }
               >
-                SAVE
+                save
               </button>
             </Link>
           </div>

@@ -1,5 +1,6 @@
 export { default as CloseIcon } from "./CloseIcon";
 export { default as DiscIcon } from "./DiscIcon";
+export { default as EditIcon } from "./EditIcon";
 export { default as GraphIcon } from "./GraphIcon";
 export { default as InfoIcon } from "./InfoIcon";
 export { default as MapIcon } from "./MapIcon";

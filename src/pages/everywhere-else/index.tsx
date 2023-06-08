@@ -13,8 +13,14 @@ const EverywhereElse: NextPage = () => {
         <SideMenu />
         <div className="grid w-full place-content-center">
           <div className="group grid grid-cols-2 items-center justify-center gap-10">
-            <PageButton title="Make your own Graph" href="/branch-1" />
-            <PageButton title="View other Popular Graphs" href="/branch-2" />
+            <PageButton
+              title="Make your own Graph"
+              href="/everywhere-else/create"
+            />
+            <PageButton
+              title="View other Popular Graphs"
+              href="/everywhere-else/explore"
+            />
           </div>
         </div>
       </main>
