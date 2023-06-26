@@ -24,6 +24,9 @@ const GraphCreation: NextPage = () => {
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
+
+  // TODO: set album modal function
+
   return (
     <>
       <Head>

@@ -1,4 +1,5 @@
-import { ReactNode, useEffect, useState } from "react";
+import type { ReactNode } from "react";
+import { useEffect, useState } from "react";
 
 import { useDebounce, useMediaQuery } from "~/hooks";
 
@@ -17,7 +18,7 @@ const RangeSlider = ({ label, sliderVal, setOuter }: props) => {
     setOuter(parseInt(e.target.value));
   };
   const validate = useDebounce((e: React.ChangeEvent<HTMLInputElement>) => {
-    let num = parseFloat(e.target.value);
+    const num = parseFloat(e.target.value);
     if (Number.isNaN(num)) {
       setPreProcess("5");
       setOuter(5);
@@ -65,7 +66,7 @@ const RangeSlider = ({ label, sliderVal, setOuter }: props) => {
           min="1"
           max="10"
           value={sliderVal}
-          className={`range ${!isMedium && "range-sm"} `}
+          className={`range ${isMedium ? "range-sm" : ""} `}
           step="1"
           onChange={handleSliderChange}
         />

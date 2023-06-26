@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { GetStaticPaths, GetStaticProps, type NextPage } from "next";
 import Head from "next/head";
 
@@ -54,7 +55,7 @@ export const getStaticPaths: GetStaticPaths = () => {
 };
 
 export const getStaticProps: GetStaticProps = (ctx) => {
-  let album = ctx.params!["album"] as keyof typeof pageInfo;
-  let a = { props: pageInfo[album] };
+  const album = ctx.params!["album"] as keyof typeof pageInfo;
+  const a = { props: pageInfo[album] };
   return a;
 };

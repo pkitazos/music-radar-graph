@@ -5,8 +5,10 @@ import Head from "next/head";
 import { SideMenu } from "~/components";
 
 const Profile: NextPage = () => {
-  let { data: session } = useSession();
-  let user = session?.user;
+  const { data: session } = useSession();
+  const user = session?.user;
+
+  // TODO: look into why these functions are erroring
 
   return (
     <>

@@ -26,8 +26,8 @@ const TemplateCreation = () => {
     <div className="flex flex-col items-center justify-center gap-y-4">
       {Array(fieldNumber)
         .fill(0)
-        .map((_) => (
-          <InputField />
+        .map((_, i) => (
+          <InputField key={i} />
         ))}
       <button className="btn-square btn" onClick={handleInputFieldCreation}>
         <PlusIcon />

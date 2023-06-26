@@ -1,4 +1,4 @@
-const ratings = {
+export const ratings = {
   // AMSP
   "2ix8vWvvSp2Yo7rKMiWpkg": [5, 5, 5, 5, 5, 5],
   // TKOL

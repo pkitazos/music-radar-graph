@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { GetStaticPaths, GetStaticProps, type NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 
-import { Loading, RadarGraph, SideMenu, TemplateArea } from "~/components";
+import { Loading, RadarGraph, SideMenu } from "~/components";
 import { pageInfo } from "~/data";
 import { api, slugify } from "~/utils";
 
@@ -76,7 +77,7 @@ export const getStaticPaths: GetStaticPaths = () => {
 };
 
 export const getStaticProps: GetStaticProps = (ctx) => {
-  let album = ctx.params!["album"] as keyof typeof pageInfo;
-  let a = { props: pageInfo[album] };
+  const album = ctx.params!["album"] as keyof typeof pageInfo;
+  const a = { props: pageInfo[album] };
   return a;
 };

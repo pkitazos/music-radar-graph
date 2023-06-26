@@ -1,5 +1,6 @@
 import "@total-typescript/ts-reset";
-interface UserProfile {
+
+export interface UserProfile {
   country: string;
   display_name: string;
   email: string;
@@ -17,14 +18,14 @@ interface UserProfile {
   uri: string;
 }
 
-interface Image {
+export interface Image {
   url: string;
   height: number;
   width: number;
 }
 
-type colorHSL = { H: number; S: number; L: number };
+export type colorHSL = { H: number; S: number; L: number };
 
-type colorRGB = { R: number; G: number; B: number };
+export type colorRGB = { R: number; G: number; B: number };
 
-type colorLab = { L: number; a: number; b: number };
+export type colorLab = { L: number; a: number; b: number };

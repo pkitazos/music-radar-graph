@@ -1,4 +1,4 @@
-export let albumIDs = [
+export const albumIDs = [
   {
     name: "A Moon Shaped Pool",
     id: "2ix8vWvvSp2Yo7rKMiWpkg",

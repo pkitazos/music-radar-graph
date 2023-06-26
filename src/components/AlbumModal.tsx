@@ -1,4 +1,5 @@
-import { KeyboardEventHandler, useEffect, useRef, useState } from "react";
+import type { KeyboardEventHandler } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { CloseIcon, TickIcon } from "~/SVGs";
 import { useModal } from "~/hooks";
@@ -46,7 +47,9 @@ const AlbumModal = ({ setAlbum }: props) => {
           <button
             ref={enterRef}
             disabled={!val}
-            className={`btn-primary btn-circle btn ${!val && "btn-disabled"}`}
+            className={`btn-primary btn-circle btn ${
+              val ? "btn-disabled" : ""
+            }`}
             onClick={() => {
               setAlbum(val);
               close();

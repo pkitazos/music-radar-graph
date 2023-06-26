@@ -1,5 +1,7 @@
 const romanize = (num: number) => {
-  var lookup = {
+  // TODO: sort out i type
+
+  const lookup = {
       M: 1000,
       CM: 900,
       D: 500,
