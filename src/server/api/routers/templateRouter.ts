@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { z } from "zod";
 
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
@@ -54,9 +55,9 @@ const templateRouter = createTRPCRouter({
       });
       const sortedFields = fields.sort((item) => item.fieldIndex);
 
-      let aggregateFieldValues = await Promise.all(
+      const aggregateFieldValues = await Promise.all(
         sortedFields.map(async (field) => {
-          let instanceAverage = await ctx.prisma.fieldInstance.aggregate({
+          const instanceAverage = await ctx.prisma.fieldInstance.aggregate({
             where: {
               fieldID: field.ID,
             },

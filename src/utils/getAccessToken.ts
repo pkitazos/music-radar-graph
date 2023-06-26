@@ -1,5 +1,6 @@
-import { PrismaClient, Prisma } from "@prisma/client";
-import { Session } from "next-auth";
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+import type { PrismaClient, Prisma } from "@prisma/client";
+import type { Session } from "next-auth";
 
 type ContextType = {
   session: Session | null;
@@ -11,7 +12,7 @@ type ContextType = {
 };
 
 const getAccessToken = async ({ ctx }: { ctx: ContextType }) => {
-  let userAccount = await ctx.prisma.account.findFirstOrThrow({
+  const userAccount = await ctx.prisma.account.findFirstOrThrow({
     where: {
       userId: ctx.session!.user.id,
     },

@@ -1,4 +1,5 @@
-import { Dispatch, SetStateAction } from "react";
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+import type { Dispatch, SetStateAction } from "react";
 import { RangeSlider } from "~/components";
 import { useMediaQuery } from "~/hooks";
 import { generateNumerals } from "~/utils";
@@ -21,12 +22,12 @@ const SliderArea = ({ chartData, fieldNames, setChartData }: props) => {
             key={i}
             label={
               <div>
-                {isLarge && `${numerals[i]} - `} {fieldNames[i]}
+                {isLarge && `${numerals[i]!} - `} {fieldNames[i]}
               </div>
             }
             sliderVal={item}
             setOuter={(x) => {
-              let clone = [...chartData];
+              const clone = [...chartData];
               clone[i] = x;
               setChartData(clone);
             }}

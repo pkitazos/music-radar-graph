@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { z } from "zod";
 
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
@@ -33,7 +34,7 @@ const instanceRouter = createTRPCRouter({
         select: { mediaID: true },
       });
 
-      let data = {
+      const data = {
         graphTemplateID: input.graphTemplateID,
         mediaID,
         values: {

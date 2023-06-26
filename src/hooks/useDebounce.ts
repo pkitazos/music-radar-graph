@@ -5,8 +5,7 @@ function useDebounce<T extends (...args: any[]) => void>(cb: T, delay = 1000) {
 
   return (...args: Parameters<T>) => {
     clearTimeout(timeout);
-    // @ts-ignore
-    timeout = setTimeout(() => {
+    timeout = window.setTimeout(() => {
       cb(...args);
     }, delay);
   };

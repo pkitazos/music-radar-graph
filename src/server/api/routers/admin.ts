@@ -1,10 +1,11 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { albumIDs } from "~/data/albumIDs";
 
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 
 const adminRouter = createTRPCRouter({
-  addFeatureAlbums: publicProcedure.mutation(async ({ ctx }) => {
-    let fieldNames = [
+  addFeatureAlbums: publicProcedure.mutation(({ ctx }) => {
+    const fieldNames = [
       "(underrated)",
       "Strum Strum",
       "Depression",
@@ -12,7 +13,7 @@ const adminRouter = createTRPCRouter({
       "Bleep Bloop",
       "Anxiety",
     ];
-    let featuredAlbums = albumIDs.map(async (album) => {
+    const featuredAlbums = albumIDs.map(async (album) => {
       await ctx.prisma.media.create({
         data: { mediaID: album.id, name: album.name, imageURL: album.imageURL },
       });
@@ -37,14 +38,14 @@ const adminRouter = createTRPCRouter({
   }),
 
   addFirstInstance: publicProcedure.mutation(async ({ ctx }) => {
-    let graphTemplates = await ctx.prisma.graphTemplate.findMany({
+    const graphTemplates = await ctx.prisma.graphTemplate.findMany({
       where: {
         featured: true,
       },
     });
 
     return graphTemplates.map(async (template) => {
-      let fieldTemplates = await ctx.prisma.fieldTemplate.findMany({
+      const fieldTemplates = await ctx.prisma.fieldTemplate.findMany({
         where: {
           graphTemplateID: template.ID,
         },
@@ -55,7 +56,7 @@ const adminRouter = createTRPCRouter({
           mediaID: template.mediaID,
           graphTemplateID: template.ID,
           values: {
-            create: fieldTemplates.map((field, i) => {
+            create: fieldTemplates.map((field) => {
               return {
                 fieldID: field.ID,
                 value: 5,

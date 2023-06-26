@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 
 import { DiscIcon, InfoIcon, MapIcon, UserIcon } from "~/SVGs";
 
@@ -10,11 +11,13 @@ interface props {
 }
 
 const SideMenu = ({ children }: props) => {
-  let { data: session } = useSession();
-  let user = session?.user;
+  const { data: session } = useSession();
+  const user = session?.user;
 
   const router = useRouter();
-  let path = router.pathname;
+  const path = router.pathname;
+
+  // TODO: sort out signIn and signOut type errors for entire file
 
   return (
     <div className="left-0 top-0 h-screen">
@@ -63,7 +66,7 @@ const SideMenu = ({ children }: props) => {
           <Link
             href="/"
             className={` ${
-              path == "/" && "text-lime-500"
+              path == "/" ? "text-lime-500" : ""
             } hover:bg-slate-800/50`}
           >
             <MapIcon />
@@ -73,7 +76,7 @@ const SideMenu = ({ children }: props) => {
           <Link
             href="/graphs"
             className={` ${
-              path.startsWith("/graphs") && "text-lime-500"
+              path.startsWith("/graphs") ? "text-lime-500" : ""
             } hover:bg-slate-800/50`}
           >
             <DiscIcon />
