@@ -15,12 +15,9 @@ const Home: NextPage = () => {
         <div className="grid w-full place-content-center">
           <div className="group flex items-center justify-center gap-10">
             <PageButton title="Radiohead" href="/graphs">
-              rate Radiohead&abos;s discography on 5 important metrics
+              rate Radiohead&apos;s discography on 5 fundamental metrics
             </PageButton>
-            <PageButton
-              title="the rest of the website"
-              href="/everywhere-else"
-            />
+            <PageButton title="the rest of the website" href="/coming-soon" />
           </div>
         </div>
       </main>
