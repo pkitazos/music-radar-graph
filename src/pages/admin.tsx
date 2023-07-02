@@ -20,7 +20,7 @@ const Profile: NextPage = () => {
       <main className="flex bg-dark-base">
         <SideMenu />
         <div className="grid w-full place-content-center">
-          <h1>Hey! You shouldn&apos;t be here! Naughty!</h1>
+          <h1>Hey! You shouldn&apos;t be here!</h1>
           <div className="mt-4">
             {/* <button
             className="btn-error btn"
