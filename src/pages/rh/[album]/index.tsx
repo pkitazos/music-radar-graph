@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
+import { useSession } from "next-auth/react";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
@@ -14,6 +15,9 @@ interface props {
 }
 
 const AlbumPage: NextPage<props> = ({ title, templateID }) => {
+  const { data: session } = useSession();
+  const user = session?.user;
+
   const { data: aggregateTemplateData, error } =
     api.templateRouter.getGraphTemplateAggregate.useQuery(templateID);
 
