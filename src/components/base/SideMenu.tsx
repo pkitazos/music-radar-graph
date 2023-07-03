@@ -74,9 +74,9 @@ const SideMenu = ({ children }: props) => {
         </li>
         <li className="tooltip tooltip-right" data-tip="Album selection">
           <Link
-            href="/graphs"
+            href="/rh"
             className={` ${
-              path.startsWith("/graphs") ? "text-lime-500" : ""
+              path.startsWith("/rh") ? "text-lime-500" : ""
             } hover:bg-slate-800/50`}
           >
             <DiscIcon />
